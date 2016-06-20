@@ -29,6 +29,7 @@ Route::post('api/users/login','UsersController@login');
 
 Route::group(['prefix' => 'api', 'middleware'=>'api_validate'], function () {
     Route::get('users/all','UsersController@show');    
+    Route::get('books/all','BooksController@show'); 
 });
 
 

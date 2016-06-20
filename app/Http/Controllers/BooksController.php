@@ -12,7 +12,7 @@ use App\Book;
 class BooksController extends Controller
 {
     public function __construct() {
-        $this->middleware('auth');
+//        $this->middleware('auth');
     }
     
     public function index()
@@ -24,6 +24,11 @@ class BooksController extends Controller
     public function create()
     {
         return view('books.create');
+    }
+    
+    public function show() {
+        $books['message'] = Book::paginate(10);
+        return $books;
     }
     
     public function store()
