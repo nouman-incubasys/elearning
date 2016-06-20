@@ -57,15 +57,16 @@ class UsersController extends Controller
         $user->save();
         
         $new_user = array();
-        $new_user['user']['id'] = $user->id;
-        $new_user['user']['name'] = $user->name;
-        $new_user['user']['email'] = $user->email;
-        $new_user['user']['password'] = $user->password;
-        $new_user['user']['address'] = $user->address;
-        $new_user['user']['city'] = $user->city;
-        $new_user['user']['country'] = $user->country;
-        $new_user['user']['phone_number'] = $user->phone_number;
-        $new_user['user']['access_token'] = $user->access_token;
+        $new_user['message']['code'] = '200';
+        $new_user['message']['user']['id'] = $user->id;
+        $new_user['message']['user']['name'] = $user->name;
+        $new_user['message']['user']['email'] = $user->email;
+        $new_user['message']['user']['password'] = $user->password;
+        $new_user['message']['user']['address'] = $user->address;
+        $new_user['message']['user']['city'] = $user->city;
+        $new_user['message']['user']['country'] = $user->country;
+        $new_user['message']['user']['phone_number'] = $user->phone_number;
+        $new_user['message']['user']['access_token'] = $user->access_token;
         
         return Response::json($new_user);
     }
@@ -82,8 +83,9 @@ class UsersController extends Controller
         $validation = Validator::make($request,$rules);
         
         if (Auth::attempt(['email' => $request['email'], 'password' => $request['password']])) {
-            $user['user'] = User::whereEmail($request['email'])->first();
-            $user['message'] = 'User is Authenticated';
+            $user['message']['user'] = User::whereEmail($request['email'])->first();
+            $user['message']['code'] = '200';
+            $user['message']['message'] = 'User is Authenticated';
         }
         else{
             $user['message'] = 'User not Authenticated';
