@@ -58,7 +58,6 @@ class UsersController extends Controller
         
         $new_user = array();
         $new_user['code'] = 200;
-        $new_user['message']['id'] = $user->id;
         $new_user['message']['name'] = $user->name;
         $new_user['message']['email'] = $user->email;
         $new_user['message']['password'] = $user->password;
@@ -84,8 +83,18 @@ class UsersController extends Controller
         
         if (Auth::attempt(['email' => $request['email'], 'password' => $request['password']])) {
             $user['code'] = 200;
-            $user['message'] = User::whereEmail($request['email'])->first();
+            $userdata = User::whereEmail($request['email'])->first();
+            
+            $user['message']['name'] = $userdata->name;
+            $user['message']['email'] = $userdata->email;
+            $user['message']['password'] = $userdata->password;
+            $user['message']['address'] = $userdata->address;
+            $user['message']['city'] = $userdata->city;
+            $user['message']['country'] = $userdata->country;
+            $user['message']['phone_number'] = $userdata->phone_number;
             $user['message']['message'] = 'User is Authenticated';
+            $user['access_token'] = $userdata->access_token;
+            
         }
         else{
             $user['message'] = 'User not Authenticated';

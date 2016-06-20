@@ -27,6 +27,12 @@ class AudiosController extends Controller
         return view('audio.create');
     }
     
+    public function show() {
+        $audio['code'] = 200;
+        $audio['message'] = Audio::paginate(10);
+        return $audio;
+    }
+    
     public function edit($id)
     {
         $data['audio'] = Audio::find($id);
