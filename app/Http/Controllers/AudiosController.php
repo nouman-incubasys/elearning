@@ -13,7 +13,7 @@ use App\Audio;
 class AudiosController extends Controller
 {
     public function __construct() {
-        $this->middleware('auth');
+//        $this->middleware('auth');
     }
     
     public function index()
@@ -30,6 +30,7 @@ class AudiosController extends Controller
     public function show() {
         $audio['code'] = 200;
         $audio['message'] = Audio::paginate(10);
+        if($audio['message'])
         return Response::json($audio);
     }
     
