@@ -25,7 +25,7 @@ Route::get('/admin', 'HomeController@index');
 Route::post('api/users/register','UsersController@store');
 Route::post('api/users/login','UsersController@login');
 
-Route::group(['prefix' => 'api', function () {
+Route::group(['prefix' => 'api'], function () {
     Route::get('users/all','UsersController@show');    
     Route::get('books/all','BooksController@show');
     Route::get('audio/all','AudiosController@show');
