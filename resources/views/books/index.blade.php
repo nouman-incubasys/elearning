@@ -31,7 +31,7 @@
                     <td>{{$row['version']}}</td>
                     <td>
                         @if(!empty($row['file_icon']))
-                        <img style="width:75px;height:75px;" src="uploads/{{$row['file_icon']}}">
+                        <img style="width:75px;height:75px;" src="/uploads/{{$row['file_icon']}}">
                         @else
                         <p> No Image </p>
                         @endif

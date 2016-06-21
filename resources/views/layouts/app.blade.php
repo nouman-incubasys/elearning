@@ -59,11 +59,11 @@
                         <li><a href="{{ url('/login') }}">Login</a></li>
                         <!--<li><a href="{{ url('/register') }}">Register</a></li>-->
                     @else
-                    <li><a href="/books">Books</a></li>
-                    <li><a href="/dailyprayer" >Daily Prayer</a></li>
+                    <li><a href="/admin/books">Books</a></li>
+                    <li><a href="/admin/dailyprayer" >Daily Prayer</a></li>
                     <li><a href="#" >Donation</a></li>
-                    <li><a href="/audio" >Audio</a></li>
-                    <li><a href="/settings" >Settings</a></li>
+                    <li><a href="/admin/audio" >Audio</a></li>
+                    <li><a href="/admin/settings" >Settings</a></li>
                     <!-- Authentication Links -->
                     
                         <li class="dropdown">

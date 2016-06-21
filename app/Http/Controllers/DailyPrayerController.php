@@ -14,7 +14,7 @@ class DailyPrayerController extends Controller
     //
     
     public function __construct() {
-        $this->middleware('auth');
+//        $this->middleware('auth');
     }
     
     public function index()
@@ -74,10 +74,12 @@ class DailyPrayerController extends Controller
         return redirect('/dailyprayer');
     }
     
-    public function DailyPrayerApi($id) {
-        $data['dailyprayer'] = \App\Dailyprayer::find($id);
-        return json_encode($data);
+    public function DailyPrayerApi($date) {
+        $data['message'] = \App\Dailyprayer::wherePrayer_date($date);
+        
+        return Response::json($data);
     }
+    
     
     public function DeletePrayer($id) {
         $result = \App\Dailyprayer::find($id);

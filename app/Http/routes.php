@@ -11,17 +11,15 @@
 |
 */
 
-//Route::get('/', function () {
-//    return 'aaaa';//view('welcome');
-//});
-
 Route::auth();
 
-Route::get('/', 'HomeController@index');
 
-Route::get('/home', 'HomeController@index');
+Route::get('/' , function(){
+    return redirect('/admin');
+});
 
-Route::get('/AudioCheck/{id}', 'AudiosController@api_audio_check');
+Route::get('/admin', 'HomeController@index');
+
 
 //Mobile Api Routes
 Route::post('api/users/register','UsersController@store');
@@ -32,50 +30,46 @@ Route::group(['prefix' => 'api', 'middleware'=>'api_validate'], function () {
     Route::get('books/all','BooksController@show');
     Route::get('audio/all','AudiosController@show');
     Route::get('dailyprayer/all','DailyPrayerController@show');
-//    Route::post('dailyprayer/','DailyPrayerController@show');
+    Route::get('dailyprayer/date/{date}','DailyPrayerController@DailyPrayerApi');
 });
 
 
+// All Admin Routes
+
+Route::group(['prefix' => 'admin','middleware'=>'auth'], function () {
+    
+    Route::resource('/books', 'BooksController');
+
+    Route::any('/updatebooks/{id}', 'BooksController@updateBook');
+
+    Route::get('/DeleteBook/{id}', 'BooksController@DeleteBook');
 
 
-//Books -----
+    //Daily Devotion -----
+    Route::any('/dailyprayer/edit/{id}', 'DailyPrayerController@updatePrayer');
 
-//Route::resource('/books',[
-//    'middleware' => 'Authenticate',
-//    'uses'=>'BooksController'
-//]);
+    Route::resource('/dailyprayer', 'DailyPrayerController');
 
-Route::resource('/books', 'BooksController');
+    Route::get('/delete_prayer/{id}', 'DailyPrayerController@DeletePrayer');
 
-Route::any('/updatebooks/{id}', 'BooksController@updateBook');
+    //Settings -----
 
-Route::get('/DeleteBook/{id}', 'BooksController@DeleteBook');
+    Route::get('/delete_settings/{id}', 'SettingsController@DeleteSetting');
+
+    Route::any('/settings/edit/{id}', 'SettingsController@updateSettings');
 
 
-//Daily Devotion -----
-Route::any('/dailyprayer/edit/{id}', 'DailyPrayerController@updatePrayer');
+    Route::resource('/settings', 'SettingsController');
 
-Route::resource('/dailyprayer', 'DailyPrayerController');
+    //Audio -----
 
-Route::get('/delete_prayer/{id}', 'DailyPrayerController@DeletePrayer');
+    Route::any('/audio/edit/{id}', 'AudiosController@updateAudio');
 
-//Settings -----
+    Route::resource('/audio', 'AudiosController');
 
-Route::get('/delete_settings/{id}', 'SettingsController@DeleteSetting');
+    Route::get('/delete_audio/{id}', 'AudiosController@deleteAudio');
 
-Route::any('/settings/edit/{id}', 'SettingsController@updateSettings');
-
-//Route::get('/dailyprayerapi/{id}', 'DailyPrayerController@DailyPrayerApi');
-
-Route::resource('/settings', 'SettingsController');
-
-//Audio -----
-
-Route::any('/audio/edit/{id}', 'AudiosController@updateAudio');
-
-Route::resource('/audio', 'AudiosController');
-
-Route::get('/delete_audio/{id}', 'AudiosController@deleteAudio');
+});
 
 Route::get('protected', ['middleware' => ['auth', 'admin'], function() {
     return "this page requires that you be logged in and an Admin";
