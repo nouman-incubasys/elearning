@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 //use Illuminate\Support\Facades\Request;
 
 use App\Http\Requests;
-
+use Illuminate\Support\Facades\Response;
 use App\Audio;
 
 class AudiosController extends Controller
@@ -30,7 +30,7 @@ class AudiosController extends Controller
     public function show() {
         $audio['code'] = 200;
         $audio['message'] = Audio::paginate(10);
-        return $audio;
+        return Response::json($audio);
     }
     
     public function edit($id)
