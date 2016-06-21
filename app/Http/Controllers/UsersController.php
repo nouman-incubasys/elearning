@@ -44,15 +44,24 @@ class UsersController extends Controller
             'password' => 'required'
         ];
         $validation = Validator::make($request,$rules);
+        
+        if ($validation->fails()) {
+            $user['code'] = 105;
+            $user['message'] = 'Insufficient Parameters';
+            return Response::json($user);
+        }
+        
         // TODO
         $user = new User();
-        $user->name= $request['name'];
-        $user->password= bcrypt($request['password']);
-        $user->email= $request['email'];
-        $user->address= $request['address'];
-        $user->city= $request['city'];
-        $user->country= $request['country'];
-        $user->phone_number= $request['phone_number'];
+        $user->name = $request['name'];
+        $user->password = bcrypt($request['password']);
+        $user->email = $request['email'];
+        $user->address = $request['address'];
+        $user->city = $request['city'];
+        $user->country = $request['country'];
+        $user->phone_number = $request['phone_number'];
+        $user->birthdate = $request['birthday'];
+        $user->gender = $request['gender'];
         $user->access_token= bcrypt($request['email'].$request['password']);
         $user->save();
         
@@ -81,6 +90,13 @@ class UsersController extends Controller
         
         $validation = Validator::make($request,$rules);
         
+        if ($validation->fails()) {
+            $user['code'] = 105;
+            $user['message'] = 'Insufficient Parameters';
+            return Response::json($user);
+        }
+        
+        
         if (Auth::attempt(['email' => $request['email'], 'password' => $request['password']])) {
             $user['code'] = 200;
             $userdata = User::whereEmail($request['email'])->first();
@@ -97,6 +113,7 @@ class UsersController extends Controller
             
         }
         else{
+            $user['code'] = 104;
             $user['message'] = 'User not Authenticated';
         }
         

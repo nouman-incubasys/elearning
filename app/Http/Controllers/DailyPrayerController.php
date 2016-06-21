@@ -56,6 +56,11 @@ class DailyPrayerController extends Controller
         return view('dailyprayers.edit')->with($data); 
     }
     
+    public function show() {
+        $daily['message'] = Dailyprayer::paginate(10);
+        return $daily;
+    }
+    
     public function updatePrayer($id)
     { 
         $input = Request::all();
