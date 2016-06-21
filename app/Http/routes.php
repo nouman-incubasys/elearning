@@ -25,12 +25,12 @@ Route::get('/admin', 'HomeController@index');
 Route::post('api/users/register','UsersController@store');
 Route::post('api/users/login','UsersController@login');
 
-Route::group(['prefix' => 'api', 'middleware'=>'api_validate'], function () {
+Route::group(['prefix' => 'api', function () {
     Route::get('users/all','UsersController@show');    
     Route::get('books/all','BooksController@show');
     Route::get('audio/all','AudiosController@show');
     Route::get('dailyprayer/all','DailyPrayerController@show');
-    Route::get('dailyprayer/date/{date}','DailyPrayerController@DailyPrayerApi');
+    Route::get('dailyprayer/search','DailyPrayerController@DailyPrayerApi');
 });
 
 

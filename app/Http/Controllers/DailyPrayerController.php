@@ -1,13 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
 //use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Request;
-
 use App\Http\Requests;
-
 use App\Dailyprayer;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Response;
 
 class DailyPrayerController extends Controller
 {
@@ -74,8 +73,22 @@ class DailyPrayerController extends Controller
         return redirect('/dailyprayer');
     }
     
-    public function DailyPrayerApi($date) {
-        $data['message'] = \App\Dailyprayer::wherePrayer_date($date);
+    public function DailyPrayerApi() {
+        $input = Input::all();
+        $data['date'] = $input['date'];
+        
+        if(!isset($input['date']) || empty($input['date'])){
+            $data['code'] = 105;
+            $data['message'] = 'Insufficient Parameter';
+        }
+        
+        $data['code'] = 200;
+        $data['message'] = \App\Dailyprayer::wherePrayer_date($input['date'])->first();
+        
+        if(empty($data['message'])){
+            $data['code'] = 104;
+            $data['message'] = 'Not Found any Prayer for the date';
+        }
         
         return Response::json($data);
     }
