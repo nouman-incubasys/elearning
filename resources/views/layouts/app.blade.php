@@ -29,7 +29,7 @@
     
 </head>
 <?php
-$base_url = '/elearning/public';
+$base_url = '/elearning/public/admin/';
 $imageURL = '/elearning/public/uploads/';
 ?>
 <body id="app-layout">

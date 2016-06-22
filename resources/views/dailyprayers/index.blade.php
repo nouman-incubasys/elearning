@@ -6,7 +6,7 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">Daily Devotion</div>
-                <a role="button" class="btn btn-primary btn-block" href="{{$base_url}}/dailyprayer/create">Add Devotion</a>
+                <a role="button" class="btn btn-primary btn-block" href="{{$base_url}}dailyprayer/create">Add Devotion</a>
             </div>
         </div>
        @if(isset($dailyprayer) && !empty($dailyprayer)) 
