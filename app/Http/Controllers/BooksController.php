@@ -27,6 +27,7 @@ class BooksController extends Controller
     }
     
     public function show() {
+        $books['code'] = 200;
         $books['message'] = Book::paginate(10);
         return Response::json($books);
     }

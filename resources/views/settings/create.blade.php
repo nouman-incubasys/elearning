@@ -12,8 +12,9 @@
         <form action="/settings" class="form-horizontal" role="form" method="POST" enctype="multipart/form-data">
             
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                       
-                
+                   <?php
+                  echo url('/');    
+                ?>
                 <div class="form-group">    
                     <label class="control-label col-sm-2" for="email">Add Channel Name</label>
                     <div class="col-sm-4">
