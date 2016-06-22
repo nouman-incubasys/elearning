@@ -8,7 +8,7 @@
                 <div class="panel-heading">Edit Books Here</div>
             </div>
         </div>
-        <form action="/updatebooks/{{$book['id']}}" class="form-horizontal" role="form" method="POST" enctype="multipart/form-data">
+        <form action="{{ url('admin/updatebooks/'.$book['id']) }}" class="form-horizontal" role="form" method="POST" enctype="multipart/form-data">
             
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             

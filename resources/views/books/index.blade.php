@@ -6,7 +6,7 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">Books</div>
-                <a role="button" class="btn btn-primary btn-block" href="books/create">Add Book</a>
+                <a role="button" class="btn btn-primary btn-block" href="{{ url('admin/books/create') }}">Add Book</a>
             </div>
         </div>
        @if(isset($book) && !empty($book)) 
@@ -36,7 +36,7 @@
                         <p> No Image </p>
                         @endif
                     </td>
-                    <td><a style="color:green;" href="books/{{$row['id']}}/edit/">Edit</a> | <a href="DeleteBook/{{$row['id']}}" style="color:red;">Delete</a></td>
+                    <td><a style="color:green;" href="{{ url('admin/books/'.$row['id'].'/edit/') }}">Edit</a> | <a href="{{ url('admin/DeleteBook/'.$row['id']) }}" style="color:red;">Delete</a></td>
                     <td>
                         @if(!empty($row['book_file']))
                             <a href="/uploads/{{$row['book_file']}}" download>Download</a>

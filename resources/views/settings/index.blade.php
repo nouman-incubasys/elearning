@@ -6,7 +6,7 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">Settings</div>
-                <a role="button" class="btn btn-primary btn-block" href="settings/create">Add Channels</a>
+                <a role="button" class="btn btn-primary btn-block" href="{{ url('admin/settings/create') }}">Add Channels</a>
             </div>
         </div>
        @if(isset($settings) && !empty($settings)) 
@@ -25,7 +25,7 @@
                     <td>{{$key +1}}</td>
                     <td>{{$row['type']}}</td>
                     <td>{{$row['channel_id']}}</td>
-                    <td><a style="color:green;" href="settings/{{$row['id']}}/edit/">Edit</a> | <a href="delete_settings/{{$row['id']}}" style="color:red;">Delete</a></td>
+                    <td><a style="color:green;" href="{{ url('admin/settings/'.$row['id'].'/edit') }}">Edit</a> | <a href="{{ url('admin/delete_settings/'.$row['id']) }}" style="color:red;">Delete</a></td>
                 </tr>
                 @endforeach
             </tbody>

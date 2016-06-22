@@ -9,7 +9,7 @@
             </div>
         </div>
         
-        <form action="/dailyprayer/edit/{{$dailyprayer['id']}}" class="form-horizontal" role="form" method="POST" enctype="multipart/form-data">
+        <form action="{{ URL::to('admin/dailyprayer/edit/'.$dailyprayer['id']) }}" class="form-horizontal" role="form" method="POST" enctype="multipart/form-data">
             
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                        

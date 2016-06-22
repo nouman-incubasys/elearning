@@ -41,7 +41,7 @@ class SettingsController extends Controller
         $setting->type = $input['type'];
         $setting->channel_id = $input['channel'];
         $setting->save();
-        return redirect('/settings');
+        return redirect('/admin/settings');
     }
     
     public function updateSettings($id)
@@ -53,12 +53,12 @@ class SettingsController extends Controller
         $setting->type = $input['type'];
         $setting->channel_id = $input['channel'];
         $setting->save();
-        return redirect('/settings');
+        return redirect('/admin/settings');
     }
     
     public function DeleteSetting($id) {
         $result = Setting::find($id);
         $result->delete();
-        return redirect('/settings');
+        return redirect('/admin/settings');
     }
 }

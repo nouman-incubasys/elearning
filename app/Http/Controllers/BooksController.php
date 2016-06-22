@@ -64,7 +64,7 @@ class BooksController extends Controller
         $book->file_icon = $fileName;
         $book->book_file = $bookName;
         $book->save();
-        return redirect('/books');
+        return redirect('/admin/books');
     }
     
     public function edit($id)
@@ -95,13 +95,13 @@ class BooksController extends Controller
         $book->version = $input['version'];
         $book->file_icon = $input['file_icon'];
         $book->update();
-        return redirect('/books');
+        return redirect('/admin/books');
     }
     
     public function DeleteBook($id) {
         $result = \App\Book::find($id);
         $result->delete();
-        return redirect('/books');
+        return redirect('/admin/books');
     }
     
 }

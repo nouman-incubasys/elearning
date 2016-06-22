@@ -64,7 +64,7 @@ class AudiosController extends Controller
         $audio->vocalist = $input['vocalist'];
         $audio->audio_file = $fileName;
         $audio->save();
-        return redirect('/audio');
+        return redirect('/admin/audio');
     }
     
     public function updateAudio($id)
@@ -94,14 +94,14 @@ class AudiosController extends Controller
         $audio->vocalist = $input['vocalist'];
 //        $audio->audio_file = $fileName;
         $audio->save();
-        return redirect('/audio');
+        return redirect('/admin/audio');
     }
     
     public function deleteAudio($id) {
         
         $result = Audio::find($id);
         $result->delete();
-        return redirect('/audio');
+        return redirect('/admin/audio');
         
     }
     

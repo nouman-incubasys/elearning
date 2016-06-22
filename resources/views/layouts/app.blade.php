@@ -63,11 +63,11 @@ $imageURL = '/elearning/public/uploads/';
                         <li><a href="{{ url('/login') }}">Login</a></li>
                         <!--<li><a href="{{ url('/register') }}">Register</a></li>-->
                     @else
-                    <li><a href="{{$base_url}}/admin/books">Books</a></li>
-                    <li><a href="{{$base_url}}/admin/dailyprayer" >Daily Prayer</a></li>
+                    <li><a href="{{url('/admin/books')}}">Books</a></li>
+                    <li><a href="{{url('/admin/dailyprayer')}}" >Daily Prayer</a></li>
                     <li><a href="#" >Donation</a></li>
-                    <li><a href="{{$base_url}}/admin/audio" >Audio</a></li>
-                    <li><a href="{{$base_url}}/admin/settings" >Settings</a></li>
+                    <li><a href="{{url('/admin/audio')}}" >Audio</a></li>
+                    <li><a href="{{url('/admin/settings')}}" >Settings</a></li>
                     <!-- Authentication Links -->
                     
                         <li class="dropdown">

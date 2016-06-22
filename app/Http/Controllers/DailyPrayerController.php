@@ -46,7 +46,7 @@ class DailyPrayerController extends Controller
         $prayer->reference = $input['reference'];
         $prayer->content = $input['content'];
         $prayer->save();
-        return redirect('/dailyprayer');
+        return redirect('/admin/dailyprayer');
     }
     
     public function edit($id)
@@ -70,7 +70,7 @@ class DailyPrayerController extends Controller
         $prayer->reference = $input['reference'];
         $prayer->content = $input['content'];
         $prayer->update();
-        return redirect('/dailyprayer');
+        return redirect('/admin/dailyprayer');
     }
     
     public function DailyPrayerApi() {
@@ -97,6 +97,6 @@ class DailyPrayerController extends Controller
     public function DeletePrayer($id) {
         $result = \App\Dailyprayer::find($id);
         $result->delete();
-        return redirect('/dailyprayer');
+        return redirect('/admin/dailyprayer');
     }
 }

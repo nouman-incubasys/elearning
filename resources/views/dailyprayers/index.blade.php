@@ -6,7 +6,7 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">Daily Devotion</div>
-                <a role="button" class="btn btn-primary btn-block" href="{{$base_url}}dailyprayer/create">Add Devotion</a>
+                <a role="button" class="btn btn-primary btn-block" href="{{ url('admin/dailyprayer/create') }}">Add Devotion</a>
             </div>
         </div>
        @if(isset($dailyprayer) && !empty($dailyprayer)) 
@@ -37,7 +37,7 @@
                             {{$row['prayer_date']}}
                         @endif
                     </td>
-                    <td><a style="color:green;" href="dailyprayer/{{$row['id']}}/edit/">Edit</a> | <a href="delete_prayer/{{$row['id']}}" style="color:red;">Delete</a></td>
+                    <td><a style="color:green;" href="{{ url('admin/dailyprayer/'.$row['id'].'/edit/')}}">Edit</a> | <a href="{{ url('admin/delete_prayer/'.$row['id'])}}" style="color:red;">Delete</a></td>
                 </tr>
                 @endforeach
             </tbody>
