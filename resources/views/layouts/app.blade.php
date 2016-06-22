@@ -30,6 +30,7 @@
 </head>
 <?php
 $base_url = '/elearning/public';
+$imageURL = '/elearning/public/uploads/';
 ?>
 <body id="app-layout">
     <nav class="navbar-inverse navbar-default navbar-static-top">

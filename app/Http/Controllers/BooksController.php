@@ -29,6 +29,16 @@ class BooksController extends Controller
     public function show() {
         $books['code'] = 200;
         $books['message'] = Book::paginate(10);
+//        foreach ($data as $row){
+//        $books['message']['id'] = $row['id'];
+//        $books['message']['title'] = $row['title'];
+//        $books['message']['author'] = $row['author'];
+//        $books['message']['version'] = $row['version'];
+//        $books['message']['file_icon'] = '/elearning/public/uploads/'.$row['file_icon'];
+//        $books['message']['book_file'] = '/elearning/public/uploads/'.$row['book_file'];
+//        $books['message']['created_at'] = $row['created_at'];
+//        $books['message']['updated_at'] = $row['updated_at'];
+//        }
         return Response::json($books);
     }
     
