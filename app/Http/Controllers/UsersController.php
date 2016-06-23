@@ -69,10 +69,11 @@ class UsersController extends Controller
         $new_user['code'] = 200;
         $new_user['message']['name'] = $user->name;
         $new_user['message']['email'] = $user->email;
-        $new_user['message']['password'] = $user->password;
         $new_user['message']['address'] = $user->address;
         $new_user['message']['city'] = $user->city;
         $new_user['message']['country'] = $user->country;
+        $new_user['message']['gender'] = $user->gender;
+        $new_user['message']['birthday'] = $user->birthdate;
         $new_user['message']['phone_number'] = $user->phone_number;
         $new_user['message']['access_token'] = $user->access_token;
         
@@ -103,11 +104,12 @@ class UsersController extends Controller
             
             $user['message']['name'] = $userdata->name;
             $user['message']['email'] = $userdata->email;
-            $user['message']['password'] = $userdata->password;
             $user['message']['address'] = $userdata->address;
             $user['message']['city'] = $userdata->city;
             $user['message']['country'] = $userdata->country;
             $user['message']['phone_number'] = $userdata->phone_number;
+            $user['message']['gender'] = $user->gender;
+            $user['message']['birthday'] = $user->birthdate;
             $user['message']['message'] = 'User is Authenticated';
             $user['access_token'] = $userdata->access_token;
             
