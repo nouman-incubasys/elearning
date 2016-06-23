@@ -31,6 +31,7 @@ Route::group(['prefix' => 'api'], function () {
     Route::get('audio/all','AudiosController@show');
     Route::get('dailyprayer/all','DailyPrayerController@show');
     Route::get('dailyprayer/search','DailyPrayerController@DailyPrayerApi');
+    Route::get('books/search','BooksController@bookSearch');
 });
 
 

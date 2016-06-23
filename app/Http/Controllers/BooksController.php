@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Response;
 use App\Book;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Input;
 
 class BooksController extends Controller
 {
@@ -28,11 +30,11 @@ class BooksController extends Controller
     
     public function show() {
         $books['code'] = 200;
-        $books['message'] = Book::paginate(10);
+        $books['message'] = Book::simplePaginate(10);
 //        foreach ($data as $row){
-//        $books['message']['id'] = $row['id'];
-//        $books['message']['title'] = $row['title'];
-//        $books['message']['author'] = $row['author'];
+//        $books['message']['data']['id'] = $row['id'];
+//        $books['message']['data']['title'] = $row['title'];
+//        $books['message'][data]['author'] = $row['author'];
 //        $books['message']['version'] = $row['version'];
 //        $books['message']['file_icon'] = '/elearning/public/uploads/'.$row['file_icon'];
 //        $books['message']['book_file'] = '/elearning/public/uploads/'.$row['book_file'];
@@ -61,8 +63,8 @@ class BooksController extends Controller
         $book->title = $input['title'];
         $book->author = $input['author'];
         $book->version = $input['version'];
-        $book->file_icon = $fileName;
-        $book->book_file = $bookName;
+        $book->file_icon = URL::to('/uploads').'/'.$fileName;
+        $book->book_file = URL::to('/uploads').'/'.$bookName;
         $book->save();
         return redirect('/admin/books');
     }
@@ -75,15 +77,6 @@ class BooksController extends Controller
     
     public function update()
     { 
-//        $input = Request::all();
-//        dd($input);
-//        $book = new Book();
-//        $book->title = $input['title'];
-//        $book->author = $input['author'];
-//        $book->version = $input['version'];
-//        $book->file_icon = $input['file_icon'];
-//        $book->save();
-//        return redirect('/');
     }
     
     public function updateBook($id)
@@ -96,6 +89,30 @@ class BooksController extends Controller
         $book->file_icon = $input['file_icon'];
         $book->update();
         return redirect('/admin/books');
+    }
+    
+    public function bookSearch() {
+        
+        $input = Input::all();
+        
+        if(!isset($input['key']) || empty($input['key'])){
+            $data['code'] = 105;
+            $data['message'] = 'Insufficient Parameter';
+            return Response::json($data); 
+        }
+        
+        $data['code'] = 200;
+        $data['message'] = Book::whereTitle($input['key'])
+                ->orWhere(function ($query) use($input) {
+                $query->where('Author', '=', $input['key']);
+            })->first();
+               
+        if(empty($data['message'])){
+            $data['code'] = 104;
+            $data['message'] = 'No Book Found';
+        }
+        
+        return Response::json($data);    
     }
     
     public function DeleteBook($id) {

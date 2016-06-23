@@ -29,7 +29,7 @@
                     <td>{{$key +1}}</td>
                     <td>{{$row['prayer']}}</td>
                     <td>{{$row['verse']}}</td>
-                    <td><img src="/uploads/{{$row['prayer_icon']}}" style="width: 100px;height: 100px;"></td>
+                    <td><img src="{{$row['prayer_icon']}}" style="width: 100px;height: 100px;"></td>
                     <td>{{$row['reference']}}</td>
                     <td>{{$row['content']}}</td>
                     <td>

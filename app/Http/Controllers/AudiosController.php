@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 //use Illuminate\Support\Facades\Request;
-
 use App\Http\Requests;
 use Illuminate\Support\Facades\Response;
 use App\Audio;
+use Illuminate\Support\Facades\URL;
 
 class AudiosController extends Controller
 {
@@ -63,7 +62,7 @@ class AudiosController extends Controller
         $audio->title = $input['title'];
         $audio->vocalist = $input['vocalist'];
         $audio->category = $input['category'];
-        $audio->audio_file = $fileName;
+        $audio->audio_file = URL::to('/uploads/audio').'/'. $fileName;
         $audio->save();
         return redirect('/admin/audio');
     }

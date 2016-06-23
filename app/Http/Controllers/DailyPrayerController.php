@@ -42,7 +42,7 @@ class DailyPrayerController extends Controller
         $prayer->prayer = $input['prayer'];
         $prayer->verse = $input['verse'];
         $prayer->prayer_date = $input['prayer_date'];
-        $prayer->prayer_icon = $fileName;
+        $prayer->prayer_icon = URL::to('/uploads').'/'.$fileName;
         $prayer->reference = $input['reference'];
         $prayer->content = $input['content'];
         $prayer->save();

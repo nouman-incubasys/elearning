@@ -31,9 +31,9 @@
                     <td>{{$row['vocalist']}}</td>
                     <td>
                         <audio controls>
-                            <source src="{{ url('uploads/audio/'.$row['audio_file']) }}" type="audio/mpeg">
-                            <source src="{{ url('uploads/audio/'.$row['audio_file']) }}" type="audio/ogg">
-                            <source src="{{ url('uploads/audio/'.$row['audio_file']) }}" type="audio/wav">
+                            <source src="{{ $row['audio_file'] }}" type="audio/mpeg">
+                            <source src="{{ $row['audio_file'] }}" type="audio/ogg">
+                            <source src="{{ $row['audio_file'] }}" type="audio/wav">
                             Your browser does not support the audio element.
                         </audio>
                     </td>

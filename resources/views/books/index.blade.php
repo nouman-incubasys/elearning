@@ -31,7 +31,7 @@
                     <td>{{$row['version']}}</td>
                     <td>
                         @if(!empty($row['file_icon']))
-                        <img style="width:75px;height:75px;" src="/uploads/{{$row['file_icon']}}">
+                        <img style="width:75px;height:75px;" src="{{$row['file_icon']}}">
                         @else
                         <p> No Image </p>
                         @endif
@@ -39,7 +39,7 @@
                     <td><a style="color:green;" href="{{ url('admin/books/'.$row['id'].'/edit/') }}">Edit</a> | <a href="{{ url('admin/DeleteBook/'.$row['id']) }}" style="color:red;">Delete</a></td>
                     <td>
                         @if(!empty($row['book_file']))
-                            <a href="/uploads/{{$row['book_file']}}" download>Download</a>
+                            <a href="{{$row['book_file']}}" download>Download</a>
                         @endif
                     </td>
                 </tr>
