@@ -108,8 +108,8 @@ class UsersController extends Controller
             $user['message']['city'] = $userdata->city;
             $user['message']['country'] = $userdata->country;
             $user['message']['phone_number'] = $userdata->phone_number;
-            $user['message']['gender'] = $user->gender;
-            $user['message']['birthday'] = $user->birthdate;
+            $user['message']['gender'] = $userdata->gender;
+            $user['message']['birthday'] = $userdata->birthdate;
             $user['message']['message'] = 'User is Authenticated';
             $user['access_token'] = $userdata->access_token;
             
