@@ -9,7 +9,7 @@
             </div>
         </div>
         
-        <form action="/elearning/public/admin/audio" class="form-horizontal" role="form" method="POST" enctype="multipart/form-data">
+        <form action="{{ url('admin/audio') }}" class="form-horizontal" role="form" method="POST" enctype="multipart/form-data">
             
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                        
@@ -24,6 +24,13 @@
                     <label class="control-label col-sm-2" for="vocalist">Audio Vocalist</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" name="vocalist" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">    
+                    <label class="control-label col-sm-2" for="vocalist">Audio Category</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="category" required>
                     </div>
                 </div>
 

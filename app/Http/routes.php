@@ -34,7 +34,7 @@ Route::group(['prefix' => 'api'], function () {
 });
 
 
-// All Admin Routes
+//------->> All Admin Routes
 
 Route::group(['prefix' => 'admin','middleware'=>'auth'], function () {
     

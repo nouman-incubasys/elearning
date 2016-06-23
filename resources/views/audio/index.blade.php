@@ -6,7 +6,7 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">Audio</div>
-                <a role="button" class="btn btn-primary btn-block" href="audio/create">Add Audio</a>
+                <a role="button" class="btn btn-primary btn-block" href="{{ url('admin/audio/create') }}">Add Audio</a>
             </div>
         </div>
        @if(isset($audio) && !empty($audio)) 
@@ -15,6 +15,7 @@
                 <tr  class="info">
                     <th>Sr</th>
                     <th>Title</th>
+                    <th>Category</th>
                     <th>Vocalist</th>
                     <th>Audio File</th>
                     <th>File Download</th>
@@ -26,17 +27,18 @@
                 <tr>
                     <td>{{$key +1}}</td>
                     <td>{{$row['title']}}</td>
+                    <td>{{$row['category']}}</td>
                     <td>{{$row['vocalist']}}</td>
                     <td>
                         <audio controls>
-                            <source src="/uploads/audio/{{$row['audio_file']}}" type="audio/mpeg">
-                            <source src="/uploads/audio/{{$row['audio_file']}}" type="audio/ogg">
-                            <source src="/uploads/audio/{{$row['audio_file']}}" type="audio/wav">
+                            <source src="{{ url('uploads/audio/'.$row['audio_file']) }}" type="audio/mpeg">
+                            <source src="{{ url('uploads/audio/'.$row['audio_file']) }}" type="audio/ogg">
+                            <source src="{{ url('uploads/audio/'.$row['audio_file']) }}" type="audio/wav">
                             Your browser does not support the audio element.
                         </audio>
                     </td>
                     <td><a href="/uploads/audio/{{$row['audio_file']}}">Download</a></td>
-                    <td><a style="color:green;" href="audio/{{$row['id']}}/edit/">Edit</a> | <a href="delete_audio/{{$row['id']}}" style="color:red;">Delete</a></td>
+                    <td><a style="color:green;" href="{{ url('admin/audio/'.$row['id'].'/edit/') }}">Edit</a> | <a href="{{ url('admin/delete_audio/'.$row['id']) }}" style="color:red;">Delete</a></td>
                 </tr>
                 @endforeach
             </tbody>

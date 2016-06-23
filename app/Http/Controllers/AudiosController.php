@@ -62,6 +62,7 @@ class AudiosController extends Controller
         $audio = new Audio();
         $audio->title = $input['title'];
         $audio->vocalist = $input['vocalist'];
+        $audio->category = $input['category'];
         $audio->audio_file = $fileName;
         $audio->save();
         return redirect('/admin/audio');
@@ -92,6 +93,7 @@ class AudiosController extends Controller
         $audio = Audio::find($id);
         $audio->title = $input['title'];
         $audio->vocalist = $input['vocalist'];
+        $audio->category = $input['category'];
 //        $audio->audio_file = $fileName;
         $audio->save();
         return redirect('/admin/audio');
