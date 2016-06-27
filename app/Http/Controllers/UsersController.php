@@ -74,7 +74,7 @@ class UsersController extends Controller
         $new_user['message']['gender'] = $user->gender;
         $new_user['message']['birthday'] = $user->birthdate;
         $new_user['message']['access_token'] = $user->access_token;
-        
+
         return Response::json($new_user);
     }
     
@@ -105,7 +105,6 @@ class UsersController extends Controller
             $user['message']['address'] = $userdata->address;
             $user['message']['city'] = $userdata->city;
             $user['message']['country'] = $userdata->country;
-            $user['message']['phone_number'] = $userdata->phone_number;
             $user['message']['gender'] = $userdata->gender;
             $user['message']['birthday'] = $userdata->birthdate;
             $user['message']['message'] = 'User is Authenticated';
