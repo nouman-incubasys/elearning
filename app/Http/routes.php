@@ -24,7 +24,7 @@ Route::get('/' , function(){
     return view('user.index');    
 });
 
-Route::get('/admin', 'HomeController@index');
+Route::get('/admin', 'Auth\AuthController@getLogin');
 
 
 //Mobile Api Routes
