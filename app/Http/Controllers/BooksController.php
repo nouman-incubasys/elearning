@@ -30,7 +30,8 @@ class BooksController extends Controller
     
     public function show() {
         $books['code'] = 200;
-        $books['message'] = Book::simplePaginate(10);
+        $books['message'] = Book::simplepaginate(10);
+        $filtered = $books['message'];
 //        foreach ($data as $row){
 //        $books['message']['data']['id'] = $row['id'];
 //        $books['message']['data']['title'] = $row['title'];
@@ -41,7 +42,7 @@ class BooksController extends Controller
 //        $books['message']['created_at'] = $row['created_at'];
 //        $books['message']['updated_at'] = $row['updated_at'];
 //        }
-        return Response::json($books);
+        return Response::json($filtered);
     }
     
     public function store()

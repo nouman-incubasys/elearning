@@ -15,7 +15,13 @@ Route::auth();
 
 
 Route::get('/' , function(){
-    return redirect('/admin');
+    if(Auth::check()){
+        if(Auth::user()->usergroups_id == 1)
+            return redirect('/admin');
+
+        return view('user.index');
+    }
+    return view('user.index');    
 });
 
 Route::get('/admin', 'HomeController@index');
@@ -32,6 +38,7 @@ Route::group(['prefix' => 'api'], function () {
     Route::get('dailyprayer/all','DailyPrayerController@show');
     Route::get('dailyprayer/search','DailyPrayerController@DailyPrayerApi');
     Route::get('books/search','BooksController@bookSearch');
+    Route::get('settings/store','SettingsController@storeSetting');
 });
 
 
@@ -71,6 +78,22 @@ Route::group(['prefix' => 'admin','middleware'=>'auth'], function () {
     Route::get('/delete_audio/{id}', 'AudiosController@deleteAudio');
 
 });
+//-------->>
+
+Route::get('read','HomeController@getBooks'); 
+Route::get('video','HomeController@getVideo'); 
+Route::get('radio','HomeController@getRadio'); 
+Route::get('live','HomeController@getBooks'); 
+Route::get('signup','HomeController@getSignup'); 
+Route::get('login','HomeController@getLogin'); 
+Route::get('devotion','HomeController@getDevotion'); 
+Route::get('donation','HomeController@getDonation');
+Route::get('livestream','HomeController@getLivestream');
+
+Route::group(['middleware'=>'auth'], function () {
+    
+});
+
 
 Route::get('protected', ['middleware' => ['auth', 'admin'], function() {
     return "this page requires that you be logged in and an Admin";

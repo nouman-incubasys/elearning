@@ -56,6 +56,26 @@ class SettingsController extends Controller
         return redirect('/admin/settings');
     }
     
+    public function storeSetting()
+    { 
+        $input = Request::all();
+        
+        if(!isset($input['type']) || empty($input['type']) || $input['channel_id'] || empty($input['channel_id'])){
+            $data['code'] = 105;
+            $data['message'] = 'Insufficient Parameter';
+            return Response::json($data); 
+        }
+        //saving data
+        $setting = new Setting();
+        $setting->type = $input['type'];
+        $setting->channel_id = $input['channel_id'];
+        $setting->save();
+        
+        $data['code'] = 200;
+        $data['message'] = 'Settings Stored';
+        return Response::json($data); 
+    }
+    
     public function DeleteSetting($id) {
         $result = Setting::find($id);
         $result->delete();

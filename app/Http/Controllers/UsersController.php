@@ -59,7 +59,6 @@ class UsersController extends Controller
         $user->address = $request['address'];
         $user->city = $request['city'];
         $user->country = $request['country'];
-        $user->phone_number = $request['phone_number'];
         $user->birthdate = $request['birthday'];
         $user->gender = $request['gender'];
         $user->access_token= bcrypt($request['email'].$request['password']);
@@ -74,7 +73,6 @@ class UsersController extends Controller
         $new_user['message']['country'] = $user->country;
         $new_user['message']['gender'] = $user->gender;
         $new_user['message']['birthday'] = $user->birthdate;
-        $new_user['message']['phone_number'] = $user->phone_number;
         $new_user['message']['access_token'] = $user->access_token;
         
         return Response::json($new_user);

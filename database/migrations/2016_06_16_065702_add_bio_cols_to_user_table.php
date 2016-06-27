@@ -16,7 +16,6 @@ class AddBioColsToUserTable extends Migration
             $table->string('address');
             $table->string('city');
             $table->string('country');
-            $table->string('phone_number');
         });
     }
 
@@ -30,8 +29,7 @@ class AddBioColsToUserTable extends Migration
         Schema::table('users', function ($table) {
             $table->dropColumn('address');
             $table->dropColumn('city');
-            $table->dropColumn('country');
-            $table->dropColumn('phone_number');            
+            $table->dropColumn('country');          
         });
     }
 }
