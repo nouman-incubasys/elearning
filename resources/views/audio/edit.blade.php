@@ -38,9 +38,9 @@
                     <label class="control-label col-sm-2" for="vocalist">Audio File</label>
                     <div class="col-sm-4">
                         <audio controls>
-                            <source src="{{ url('uploads/audio/'.$audio['audio_file']) }}" type="audio/mpeg">
-                            <source src="{{ url('uploads/audio/'.$audio['audio_file']) }}" type="audio/ogg">
-                            <source src="{{ url('uploads/audio/'.$audio['audio_file']) }}" type="audio/wav">
+                            <source src="{{$audio['audio_file']}}" type="audio/mpeg">
+                            <source src="{{$audio['audio_file']}}" type="audio/ogg">
+                            <source src="{{$audio['audio_file']}}" type="audio/wav">
                             Your browser does not support the audio element.
                         </audio> 
                     </div>
