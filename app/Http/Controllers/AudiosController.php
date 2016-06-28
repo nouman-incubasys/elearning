@@ -8,6 +8,7 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Response;
 use App\Audio;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Input;
 
 class AudiosController extends Controller
 {
