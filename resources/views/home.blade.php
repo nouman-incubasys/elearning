@@ -6,18 +6,12 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">Dashboard</div>
-
+                @if(Auth::check())
                 <div class="panel-body">
                     You are logged in! 
                     <p>Welcome {{Auth::user()->usergroups_id}}</p>
                 </div>
-                <div class="list-group">
-                    <a href="/admin/books" class="list-group-item">Books</a>
-                    <a href="/admin/dailyprayer" class="list-group-item">Daily Prayer</a>
-                    <a href="#" class="list-group-item">Users</a>
-                    <a href="#" class="list-group-item">Donation</a>
-                    <a href="#" class="list-group-item">Live Streaming</a>
-                </div>
+                @endif
             </div>
         </div>
     </div>

@@ -15,7 +15,6 @@ class CreateDailyPrayerTable extends Migration
         Schema::create('dailyprayers', function (Blueprint $table) {
             $table->increments('id');
             $table->string('prayer');
-            $table->string('prayer_icon');
             $table->timestamps();
         });
     }

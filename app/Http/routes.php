@@ -16,15 +16,25 @@ Route::auth();
 
 Route::get('/' , function(){
     if(Auth::check()){
-        if(Auth::user()->usergroups_id == 1)
-            return redirect('/admin');
-
-        return view('user.index');
+        
+        if(Auth::user()->usergroups_id == 1 || Auth::user()->usergroups_id == 2){
+             return redirect('/admin');
+        }
+        
+        return view('user.index'); 
     }
     return view('user.index');    
 });
 
-Route::get('/admin', 'Auth\AuthController@getLogin');
+Route::get('/admin/login','Auth\AuthController@getlogin');
+Route::get('/admin', function(){
+    if(Auth::check()){
+        return view('home');
+    }
+    else{
+        return  Redirect::to('/admin/login');
+    }
+});
 
 
 //Mobile Api Routes
@@ -44,7 +54,7 @@ Route::group(['prefix' => 'api'], function () {
 
 //------->> All Admin Routes
 
-Route::group(['prefix' => 'admin','middleware'=>'auth'], function () {
+Route::group(['prefix' => 'admin', 'middleware'=> 'auth'], function () {
     
     Route::resource('/books', 'BooksController');
 

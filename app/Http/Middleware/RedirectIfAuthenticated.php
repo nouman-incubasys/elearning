@@ -21,7 +21,7 @@ class RedirectIfAuthenticated
 //            if(Auth::user()->usergroups_id !=1){
 //                return 'Super Admin';
 //            }else if(Auth::user()->usergroups_id ==2){
-                return redirect('/');
+//                return redirect('/');
 //            }else{
 //                return 'App User';
 //            }

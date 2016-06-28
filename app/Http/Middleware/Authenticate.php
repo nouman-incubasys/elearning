@@ -24,8 +24,14 @@ class Authenticate
                 return redirect()->guest('login');
             }
         }
-        if(Auth::user()->usergroups_id !=1 || Auth::user()->usergroups_id !=2){
-            return redirect();
+//        die('a');
+        if(Auth::user()->usergroups_id ==1 || Auth::user()->usergroups_id ==2){
+//            die('a');
+//            return redirect('admin');
+            return $next($request);
+        }
+        else{
+            return redirect('/');
         }
         
         return $next($request);

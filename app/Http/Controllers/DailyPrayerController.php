@@ -30,19 +30,12 @@ class DailyPrayerController extends Controller
     public function store()
     { 
         $input = Request::all();
-        // file upload script
-        $destinationPath = 'uploads'; // upload path
-        
-        $extension = Request::file('prayer_icon')->getClientOriginalExtension(); // getting image extension
-        $fileName = rand(11111,99999).'.'.$extension; // renameing image
-        Request::file('prayer_icon')->move($destinationPath, $fileName); // uploading file to given path
-
+        // 
         //saving data
         $prayer = new Dailyprayer();
         $prayer->prayer = $input['prayer'];
         $prayer->verse = $input['verse'];
         $prayer->prayer_date = $input['prayer_date'];
-        $prayer->prayer_icon = URL::to('/uploads').'/'.$fileName;
         $prayer->reference = $input['reference'];
         $prayer->content = $input['content'];
         $prayer->save();
