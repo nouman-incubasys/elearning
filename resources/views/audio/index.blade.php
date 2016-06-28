@@ -16,7 +16,7 @@
                     <th>Sr</th>
                     <th>Title</th>
                     <th>Category</th>
-                    <th>Vocalist</th>
+                    <th>Speaker</th>
                     <th>Audio File</th>
                     <th>File Download</th>
                     <th>Action</th>

@@ -16,7 +16,6 @@
                     <th>Sr</th>
                     <th>Quotation</th>
                     <th>Verse</th>
-                    <th>Prayer Icon</th>
                     <th>Reference</th>
                     <th>Content</th>
                     <th>Date For Quote</th>
@@ -29,7 +28,6 @@
                     <td>{{$key +1}}</td>
                     <td>{{$row['prayer']}}</td>
                     <td>{{$row['verse']}}</td>
-                    <td><img src="{{$row['prayer_icon']}}" style="width: 100px;height: 100px;"></td>
                     <td>{{$row['reference']}}</td>
                     <td>{{$row['content']}}</td>
                     <td>

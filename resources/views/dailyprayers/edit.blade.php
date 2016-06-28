@@ -47,14 +47,6 @@
                         <input type="date" id="datepicker" class="form-control" name="prayer_date" value="{{$dailyprayer['prayer_date']}}" required>
                     </div>
                 </div>
-
-                <div class="form-group">    
-                    <label class="control-label col-sm-2" for="cover">Image</label>
-                    <div class="col-sm-4">
-                        <img src="/uploads/{{$dailyprayer['prayer_icon']}}" style="height: 200px;width: 200px;">
-                        <!--<input type="file" class="form-control" name="prayer_icon" required>-->
-                    </div>
-                </div>
                 
                 <div class="form-group"> 
                     <div class="col-sm-4 col-sm-offset-2">

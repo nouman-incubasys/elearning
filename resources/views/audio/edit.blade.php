@@ -21,7 +21,7 @@
                 </div>
                 
                 <div class="form-group">    
-                    <label class="control-label col-sm-2" for="vocalist">Audio Vocalist</label>
+                    <label class="control-label col-sm-2" for="vocalist">Audio Speaker</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" name="vocalist" value="{{$audio['vocalist']}}" required>
                     </div>
