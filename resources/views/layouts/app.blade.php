@@ -43,7 +43,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/admin') }}">
-                    PB Life
+                    PB Live
                 </a>
             </div>
 
@@ -63,6 +63,7 @@
                     <li><a href="{{url('/admin/dailyprayer')}}" >Daily Prayer</a></li>
                     <li><a href="#" >Donation</a></li>
                     <li><a href="{{url('/admin/audio')}}" >Audio</a></li>
+                    <li><a href="{{url('/admin/banner')}}" >Banners</a></li>
                     <li><a href="{{url('/admin/settings')}}" >Settings</a></li>
                     <!-- Authentication Links -->
                     

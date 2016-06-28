@@ -44,6 +44,7 @@ Route::post('api/users/login','UsersController@login');
 Route::group(['prefix' => 'api'], function () {
     Route::get('users/all','UsersController@show');    
     Route::get('books/all','BooksController@show');
+    Route::get('banner/all','BannerController@show');
     Route::get('audio/all','AudiosController@show');
     Route::get('dailyprayer/all','DailyPrayerController@show');
     Route::get('dailyprayer/search','DailyPrayerController@DailyPrayerApi');
@@ -57,35 +58,31 @@ Route::group(['prefix' => 'api'], function () {
 Route::group(['prefix' => 'admin', 'middleware'=> 'auth'], function () {
     
     Route::resource('/books', 'BooksController');
-
     Route::any('/updatebooks/{id}', 'BooksController@updateBook');
-
     Route::get('/DeleteBook/{id}', 'BooksController@DeleteBook');
 
 
     //Daily Devotion -----
     Route::any('/dailyprayer/edit/{id}', 'DailyPrayerController@updatePrayer');
-
     Route::resource('/dailyprayer', 'DailyPrayerController');
-
     Route::get('/delete_prayer/{id}', 'DailyPrayerController@DeletePrayer');
 
     //Settings -----
 
     Route::get('/delete_settings/{id}', 'SettingsController@DeleteSetting');
-
     Route::any('/settings/edit/{id}', 'SettingsController@updateSettings');
-
-
     Route::resource('/settings', 'SettingsController');
 
     //Audio -----
 
     Route::any('/audio/edit/{id}', 'AudiosController@updateAudio');
-
     Route::resource('/audio', 'AudiosController');
-
     Route::get('/delete_audio/{id}', 'AudiosController@deleteAudio');
+    
+    //Banner -----
+    Route::any('/banner/edit/{id}', 'BannerController@updateBanner');
+    Route::resource('/banner', 'BannerController');
+    Route::get('/delete_banner/{id}', 'BannerController@deleteBanner');
 
 });
 //-------->>
