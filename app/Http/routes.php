@@ -97,10 +97,6 @@ Route::group(['prefix' => 'admin', 'middleware'=> 'auth'], function () {
 //Route::get('donation','HomeController@getDonation');
 //Route::get('livestream','HomeController@getLivestream');
 
-Route::group(['middleware'=>'auth'], function () {
-    
-});
-
 
 Route::get('protected', ['middleware' => ['auth', 'admin'], function() {
     return "this page requires that you be logged in and an Admin";
