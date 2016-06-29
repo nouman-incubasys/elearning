@@ -23,19 +23,21 @@
                     <nav id="nav">
                         <ul class="list-none">
                             <li class="active"><a href="{{url('/')}}">Home</a></li>
-                            <li><a href="{{url('/read')}}">PB Library</a></li>
-                            <li><a href="{{url('/radio')}}">PB Radio</a></li>
-                            <li><a href="{{url('/video')}}">PB TV</a></li>
-                            <li><a href="{{url('/devotion')}}">Daily Devotion</a></li>
-                            <li><a href="{{url('/donation')}}">Donate</a></li>
-                            <li><a href="{{url('/livestream')}}">PB Live</a></li>
+                            <li><a id="read" href="#">PB Library</a></li>
+                            <li><a id="radio" href="{{url('/radio')}}">PB Radio</a></li>
+                            <li><a id="video" href="{{url('/video')}}">PB TV</a></li>
+                            <li><a id="devotion" href="{{url('/devotion')}}">Daily Devotion</a></li>
+                            <li><a id="donate" href="{{url('/donation')}}">Donate</a></li>
+                            <li><a id="livestream" href="{{url('/livestream')}}">PB Live</a></li>
                         </ul>
                     </nav>
                 </div>
             </div>
         </header>
         
+        <div id="main">
         @yield('content')
+        </div>
         
        	<div class="footer-holder">
             <footer id="footer">
