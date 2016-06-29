@@ -56,7 +56,7 @@ Route::group(['prefix' => 'api'], function () {
 //------->> All Admin Routes
 
 Route::group(['prefix' => 'admin', 'middleware'=> 'auth'], function () {
-    
+    //Book -----
     Route::resource('/books', 'BooksController');
     Route::any('/updatebooks/{id}', 'BooksController@updateBook');
     Route::get('/DeleteBook/{id}', 'BooksController@DeleteBook');
@@ -83,6 +83,11 @@ Route::group(['prefix' => 'admin', 'middleware'=> 'auth'], function () {
     Route::any('/banner/edit/{id}', 'BannerController@updateBanner');
     Route::resource('/banner', 'BannerController');
     Route::get('/delete_banner/{id}', 'BannerController@deleteBanner');
+    
+    //Audio Category -----
+    Route::get('/delete_category/{id}', 'AudioCategoryController@DeleteCategory');
+    Route::any('/category/edit/{id}', 'AudioCategoryController@updateCategory');
+    Route::resource('/category', 'AudioCategoryController');
 
 });
 //-------->>
