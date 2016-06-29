@@ -15,15 +15,15 @@ Route::auth();
 
 
 Route::get('/' , function(){
-    if(Auth::check()){
-        
-        if(Auth::user()->usergroups_id == 1 || Auth::user()->usergroups_id == 2){
-             return redirect('/admin');
-        }
+//    if(Auth::check()){
+//        
+//        if(Auth::user()->usergroups_id == 1 || Auth::user()->usergroups_id == 2){
+//             return redirect('/admin');
+//        }
         
         return view('user.index'); 
-    }
-    return view('user.index');    
+//    }
+//    return view('user.index');    
 });
 
 Route::get('/admin/login','Auth\AuthController@getlogin');
@@ -87,15 +87,15 @@ Route::group(['prefix' => 'admin', 'middleware'=> 'auth'], function () {
 });
 //-------->>
 
-Route::get('read','HomeController@getBooks'); 
-Route::get('video','HomeController@getVideo'); 
-Route::get('radio','HomeController@getRadio'); 
-Route::get('live','HomeController@getBooks'); 
-Route::get('signup','HomeController@getSignup'); 
-Route::get('login','HomeController@getLogin'); 
-Route::get('devotion','HomeController@getDevotion'); 
-Route::get('donation','HomeController@getDonation');
-Route::get('livestream','HomeController@getLivestream');
+//Route::get('read','HomeController@getBooks'); 
+//Route::get('video','HomeController@getVideo'); 
+//Route::get('radio','HomeController@getRadio'); 
+//Route::get('live','HomeController@getBooks'); 
+//Route::get('signup','HomeController@getSignup'); 
+//Route::get('login','HomeController@getLogin'); 
+//Route::get('devotion','HomeController@getDevotion'); 
+//Route::get('donation','HomeController@getDonation');
+//Route::get('livestream','HomeController@getLivestream');
 
 Route::group(['middleware'=>'auth'], function () {
     

@@ -18,6 +18,7 @@
                     <th>Category</th>
                     <th>Speaker</th>
                     <th>Audio File</th>
+                    <th>Album Art</th>
                     <th>File Download</th>
                     <th>Action</th>
                 </tr>
@@ -37,6 +38,10 @@
                             Your browser does not support the audio element.
                         </audio>
                     </td>
+                    <td>
+                        @if ($row['album_art'])
+                            <img src="{{$row['album_art']}}" style="width: 200px; height: 150px;"></td>
+                        @endif
                     <td><a href="/uploads/audio/{{$row['audio_file']}}">Download</a></td>
                     <td><a style="color:green;" href="{{ url('admin/audio/'.$row['id'].'/edit/') }}">Edit</a> | <a href="{{ url('admin/delete_audio/'.$row['id']) }}" style="color:red;">Delete</a></td>
                 </tr>

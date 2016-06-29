@@ -35,6 +35,13 @@
                 </div>
 
                 <div class="form-group">    
+                    <label class="control-label col-sm-2" for="vocalist">Album Art</label>
+                    <div class="col-sm-4">
+                        <input type="file" class="form-control" name="album_art" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">    
                     <label class="control-label col-sm-2" for="cover">Audio File Upload</label>
                     <div class="col-sm-4">
                         <input type="file" class="form-control" name="audio_file" required>

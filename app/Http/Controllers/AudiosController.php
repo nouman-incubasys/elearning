@@ -31,7 +31,7 @@ class AudiosController extends Controller
         $audio['code'] = 200;
         $audio['message'] = Audio::paginate(10);
         if($audio['message'])
-        return Response::json($audio);
+            return Response::json($audio);
     }
     
     public function edit($id)
@@ -43,7 +43,6 @@ class AudiosController extends Controller
     public function store(Request $request)
     { 
         $input = $request->input();
-        
 //      
 //
 //        if ($validator->fails()) {
@@ -54,6 +53,10 @@ class AudiosController extends Controller
         
         $destinationPath = 'uploads/audio'; // upload path
         
+        $extension1 = $request->file('album_art')->getClientOriginalExtension(); // getting image extension
+        $fileName1 = rand(11111,99999).'.'.$extension1; // renameing image
+        $request->file('album_art')->move($destinationPath, $fileName1); // uploading file to given path
+        
         $extension = $request->file('audio_file')->getClientOriginalExtension(); // getting image extension
         $fileName = rand(11111,99999).'.'.$extension; // renameing image
         $request->file('audio_file')->move($destinationPath, $fileName); // uploading file to given path
@@ -63,6 +66,7 @@ class AudiosController extends Controller
         $audio->title = $input['title'];
         $audio->vocalist = $input['vocalist'];
         $audio->category = $input['category'];
+        $audio->album_art = URL::to('/uploads/audio').'/'. $fileName1;
         $audio->audio_file = URL::to('/uploads/audio').'/'. $fileName;
         $audio->save();
         return redirect('/admin/audio');
