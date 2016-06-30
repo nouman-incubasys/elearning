@@ -17,8 +17,8 @@
                 </div>
                 <div class="header-holder">
                     <ul class="client-btns list-none">
-                        <li><a href="{{url('/signup')}}">Sign up</a></li>
-                        <li><a href="{{url('/login')}}">Sign in</a></li>
+                        <li><a href="{{url('/signup')}}" id="signup">Sign up</a></li>
+                        <li><a href="{{url('/login')}}" id="login">Sign in</a></li>
                     </ul>
                     <nav id="nav">
                         <ul class="list-none">

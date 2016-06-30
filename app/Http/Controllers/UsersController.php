@@ -37,7 +37,7 @@ class UsersController extends Controller
     public function store(){
         
         $request = Input::all();
-        
+		
         $rules = [
             'name' => 'required',
             'email' => 'email',

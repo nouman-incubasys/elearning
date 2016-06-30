@@ -5,6 +5,7 @@
 <div id="main">
         <div class="visual"><img src="images/img1.jpg" width="1134" height="407" class="img-responsive"></div>
         <div class="container">
+        <input type="hidden" value="<?=date("Y/m/d")?>" id="date_time">
         <div class="twocols">
                 <div class="col">
                 <a href="#" class="col-holder">
