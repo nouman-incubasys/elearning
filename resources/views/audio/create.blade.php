@@ -44,9 +44,9 @@
                 </div>
 
                 <div class="form-group">    
-                    <label class="control-label col-sm-2" for="vocalist">Album Art</label>
+                    <label class="control-label col-sm-2" for="vocalist">Artwork</label>
                     <div class="col-sm-4">
-                        <input type="file" class="form-control" name="album_art" accept="image/gif, image/jpeg" required>
+                        <input type="file" class="form-control" name="album_art" accept="image/gif, image/jpeg" >
                     </div>
                 </div>
                 

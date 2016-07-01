@@ -18,7 +18,7 @@
                     <th>Category</th>
                     <th>Speaker</th>
                     <th>Audio File</th>
-                    <th>Album Art</th>
+                    <th>Artwork</th>
                     <th>File Download</th>
                     <th>Action</th>
                 </tr>
