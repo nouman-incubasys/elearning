@@ -37,14 +37,15 @@
                 <div class="form-group">    
                     <label class="control-label col-sm-2" for="cover">Book Cover</label>
                     <div class="col-sm-4">
-                        <input type="file" class="form-control" name="file_icon" required>
+                        <input type="file" class="form-control" accept="image/gif, image/jpeg" name="file_icon" required>
                     </div>
                 </div>
                 
                 <div class="form-group">    
                     <label class="control-label col-sm-2" for="book">Upload Book</label>
                     <div class="col-sm-4">
-                        <input type="file" class="form-control" name="book" required>
+                        <input type="file" class="form-control" name="book" accept="application/pdf,application/msword,
+  application/vnd.openxmlformats-officedocument.wordprocessingml.document" required>
                     </div>
                 </div>
                 

@@ -56,4 +56,14 @@ class AudioCategoryController extends Controller
         $result->delete();
         return redirect('/admin/category');
     }
+    
+    public function showCategorylist() {
+        
+        $input = Input::all();
+        $cat['code'] = 200;
+        $cat['message'] = AudioCategory::all();
+        
+        return Response::json($cat);
+        
+    }
 }

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Response;
 use App\Audio;
+use App\AudioCategory;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Input;
 
@@ -24,7 +25,8 @@ class AudiosController extends Controller
     
     public function create()
     {
-        return view('audio.create');
+        $data['category'] = AudioCategory::all();
+        return view('audio.create')->with($data);
     }
     
     public function show() {
@@ -34,8 +36,24 @@ class AudiosController extends Controller
             return Response::json($audio);
     }
     
+    public function showbyCategory() {
+        $input = Input::all();
+        $result = AudioCategory::whereCategory($input['category'])->first();
+        $cat = Audio::whereCategory_id($result['id'])->get();
+        
+        return Response::json($cat);
+    }
+    
+    public function showbyCategoryId() {
+        $input = Input::all();
+        $cat = Audio::whereCategory_id($input['category'])->get();
+        
+        return Response::json($cat);
+    }
+    
     public function edit($id)
     {
+        $data['category'] = AudioCategory::all();
         $data['audio'] = Audio::find($id);
         return view('audio.edit')->with($data);
     }
@@ -65,7 +83,7 @@ class AudiosController extends Controller
         $audio = new Audio();
         $audio->title = $input['title'];
         $audio->vocalist = $input['vocalist'];
-        $audio->category = $input['category'];
+        $audio->category_id = $input['category'];
         $audio->album_art = URL::to('/uploads/audio').'/'. $fileName1;
         $audio->audio_file = URL::to('/uploads/audio').'/'. $fileName;
         $audio->save();
@@ -97,7 +115,7 @@ class AudiosController extends Controller
         $audio = Audio::find($id);
         $audio->title = $input['title'];
         $audio->vocalist = $input['vocalist'];
-        $audio->category = $input['category'];
+        $audio->category_id = $input['category'];
 //        $audio->audio_file = $fileName;
         $audio->save();
         return redirect('/admin/audio');

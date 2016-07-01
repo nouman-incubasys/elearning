@@ -124,8 +124,38 @@ table {
 	line-height:22px;
 	float:right;
 }
+.client-btns .drop_down{
+    width:100%;
+    margin:2px 0 0;
+    padding:0;
+    clear:both;
+    border:1px solid rgba(0,0,0,.15);
+    border-radius:15px;
+    background:#ccc;
+    display: none;
+    overflow: hidden;
+}
+#header .drop_down li{ margin-left:0; float:none; }
+.client-btns .drop_down li a{
+    padding: 8px 10px;
+    clear: both;
+    font-weight: 400;
+    color: #000;
+    background:#ccc;
+}
+.client-btns .drop_down li a:hover{ background: #000; color:#fff; }
+.client-btns a.drop_opener{
+    padding: 8px 30px;
+    border:1px solid #fff;
+    text-align: center;
+    border-radius: 15px;
+    background-image:url(../images/down_arrow.png);
+    background-repeat: no-repeat;
+    background-position: 95% 50%;
+}
 #header ul li{
 	float:left;
+        position: relative;
 }
 #header a{ color:#fff; }
 .client-btns{

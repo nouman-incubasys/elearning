@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 //use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Request;
-
+use Illuminate\Support\Facades\Validator;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Response;
 use App\Book;
@@ -48,6 +48,19 @@ class BooksController extends Controller
     { 
         $input = Request::all();
         // file upload script
+        $rules = [
+            'file_icon' => 'mimes:jpeg,bmp,png',
+            
+        ];
+        $validation = Validator::make($input,$rules);
+        
+        if ($validation->fails()) {
+            $book['message'] = 'Insufficient Parameters';
+            dd($book);
+        }
+        else{
+            dd('validation passed');
+        }
         $destinationPath = 'uploads'; // upload path
         
         $extension = Request::file('file_icon')->getClientOriginalExtension(); // getting image extension

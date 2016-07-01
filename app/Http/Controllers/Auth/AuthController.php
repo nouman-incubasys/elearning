@@ -7,6 +7,8 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 
 class AuthController extends Controller
 {
@@ -28,7 +30,7 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin';
+    protected $redirectTo = '/';
 
     /**
      * Create a new authentication controller instance.
@@ -68,5 +70,40 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+    
+    public function postlogin(){
+        $request = Input::all();
+        
+        $rules = [
+            'email' => 'email',
+            'password' => 'required'
+        ];
+        
+        $validation = Validator::make($request,$rules);
+        
+        if ($validation->fails()) {
+            $user['code'] = 105;
+            $user['message'] = 'Insufficient Parameters';
+            return Response::json($user);
+            // return message redirect back
+        }
+        
+        if (Auth::attempt(['email' => $request['email'], 'password' => $request['password'],'usergroups_id'=>1])) {
+            return redirect()->to('admin/');
+        }
+        else if (Auth::attempt(['email' => $request['email'], 'password' => $request['password'],'usergroups_id'=>2])) {
+            return redirect()->to('admin/');
+        }
+        else{
+            return redirect()->to('/');
+        }
+        return Response::json($user);
+          
+    }
+    public function logout(){
+        Auth::logout();
+        
+        return redirect()->to('/');
     }
 }

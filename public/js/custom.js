@@ -22,6 +22,12 @@ $(document).ready(function(){
 		$('#audio').attr('src',abc);
 	  });
 	});
+        
+        //Dropdown for Logout
+        $('.drop_opener').click(function(e){
+            e.preventDefault();
+            $('.drop_down').slideToggle(500);
+        });
 });
 $(window).resize(function(){
 	//WINDOW WIDTH
@@ -339,9 +345,11 @@ newMONTH.push('<option value='+(i+1)+'>' + month_arr[i] + '</option>');
 					password: password
 				},
 				success: function (response) {
-					window.location.href = "http://localhost/elearning/public";
+					window.location.href = "http://localhost:90/elearning/public";
 					console.log(response);
 				}
 			});
 		});
 });
+//Get all videos of this channel
+//https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCrsnAHn3coN8gZD8WkJ66gg&type=video&key=AIzaSyBjlWl7HLLxgNnUvmmihnge0ZcalgNIoe8

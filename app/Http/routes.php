@@ -11,9 +11,6 @@
 |
 */
 
-Route::auth();
-
-
 Route::get('/' , function(){
 //    if(Auth::check()){
 //        
@@ -26,15 +23,22 @@ Route::get('/' , function(){
 //    return view('user.index');    
 });
 
-Route::get('/admin/login','Auth\AuthController@getlogin');
-Route::get('/admin', function(){
-    if(Auth::check()){
-        return view('home');
-    }
-    else{
-        return  Redirect::to('/admin/login');
-    }
+Route::get('/logout', function(){
+    Auth::logout();
+    return redirect('/');
 });
+
+Route::get('/admin/login','Auth\AuthController@getlogin');
+Route::post('/admin/login','Auth\AuthController@postlogin');
+Route::get('/admin/logout','Auth\AuthController@logout');
+//Route::get('/admin', function(){
+//    if(Auth::check()){
+//        return view('home');
+//    }
+//    else{
+//        return  Redirect::to('/admin/login');
+//    }
+//});
 
 
 //Mobile Api Routes
@@ -46,9 +50,13 @@ Route::group(['prefix' => 'api'], function () {
     Route::get('books/all','BooksController@show');
     Route::get('banner/all','BannerController@show');
     Route::get('audio/all','AudiosController@show');
+    Route::get('audio/category','AudiosController@showbyCategory');
+    Route::get('audio/category/list','AudioCategoryController@showCategorylist');
+    Route::get('audio/category/id','AudiosController@showbyCategoryId');
     Route::get('dailyprayer/all','DailyPrayerController@show');
     Route::get('dailyprayer/search','DailyPrayerController@DailyPrayerApi');
     Route::get('books/search','BooksController@bookSearch');
+    Route::post('comment/store','CommentsController@store');
     Route::get('settings/store','SettingsController@storeSetting');
 });
 
@@ -56,6 +64,8 @@ Route::group(['prefix' => 'api'], function () {
 //------->> All Admin Routes
 
 Route::group(['prefix' => 'admin', 'middleware'=> 'auth'], function () {
+    
+    Route::get('/',function(){return view('home');});
     //Book -----
     Route::resource('/books', 'BooksController');
     Route::any('/updatebooks/{id}', 'BooksController@updateBook');
@@ -97,7 +107,6 @@ Route::group(['prefix' => 'admin', 'middleware'=> 'auth'], function () {
 //Route::get('radio','HomeController@getRadio'); 
 //Route::get('live','HomeController@getBooks'); 
 //Route::get('signup','HomeController@getSignup'); 
-//Route::get('login','HomeController@getLogin'); 
 //Route::get('devotion','HomeController@getDevotion'); 
 //Route::get('donation','HomeController@getDonation');
 //Route::get('livestream','HomeController@getLivestream');

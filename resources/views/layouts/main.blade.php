@@ -17,8 +17,19 @@
                 </div>
                 <div class="header-holder">
                     <ul class="client-btns list-none">
+                        @if(Auth::guest())
                         <li><a href="{{url('/signup')}}" id="signup">Sign up</a></li>
                         <li><a href="{{url('/login')}}" id="login">Sign in</a></li>
+                        @else
+                        <li>
+                            <a href="#" class="drop_opener">
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
+                            <ul class="drop_down">
+                                <li><a href="{{ url('logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                            </ul>
+                        </li>
+                        @endif
                     </ul>
                     <nav id="nav">
                         <ul class="list-none">

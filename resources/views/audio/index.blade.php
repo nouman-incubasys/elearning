@@ -28,7 +28,12 @@
                 <tr>
                     <td>{{$key +1}}</td>
                     <td>{{$row['title']}}</td>
-                    <td>{{$row['category']}}</td>
+                    <td>
+                        <?php
+                        $cat = App\AudioCategory::find($row['category_id']);
+                        echo $cat['category'];
+                        ?>
+                    </td>
                     <td>{{$row['vocalist']}}</td>
                     <td>
                         <audio controls>
@@ -40,8 +45,9 @@
                     </td>
                     <td>
                         @if ($row['album_art'])
-                            <img src="{{$row['album_art']}}" style="width: 200px; height: 150px;"></td>
+                            <img src="{{$row['album_art']}}" style="width: 200px; height: 150px;">
                         @endif
+                    </td>
                     <td><a href="/uploads/audio/{{$row['audio_file']}}">Download</a></td>
                     <td><a style="color:green;" href="{{ url('admin/audio/'.$row['id'].'/edit/') }}">Edit</a> | <a href="{{ url('admin/delete_audio/'.$row['id']) }}" style="color:red;">Delete</a></td>
                 </tr>

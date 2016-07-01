@@ -30,7 +30,16 @@
                 <div class="form-group">    
                     <label class="control-label col-sm-2" for="vocalist">Audio Category</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" name="category" value="{{$audio['category']}}" required>
+                        <select class="form-control" name="category" required>
+                            <option value="">Select Category</option>
+                            <?php
+                            foreach($category as $row){
+                            ?>
+                                <option value="{{$row['id']}}" <?php if($audio['category_id']==$row['id']){ echo 'selected'; } ?>>{{$row['category']}}</option>
+                            <?php
+                            }
+                            ?>
+                        </select>
                     </div>
                 </div>
                 
