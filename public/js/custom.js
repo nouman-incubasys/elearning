@@ -150,7 +150,7 @@ $(window).resize(function(){
 			data: {date: date},
 			success: function (response) {
 				console.log(response.message);
-			
+			if(response.message != 'Not Found any Prayer for the date'){
 				var html = '<div class="visual devotion">' +
 							'<img width="1131" height="214" class="img-responsive" src="images/img11.jpg">'+
 								'<div class="visual-holder">'+
@@ -175,10 +175,23 @@ $(window).resize(function(){
 							html+= '</article>'+
 						'</div>'+
 					'</div>';
+			}else{
+					 var html = '<div class="visual devotion">' +
+							'<img width="1131" height="214" class="img-responsive" src="images/img11.jpg">'+
+								'<div class="visual-holder">'+
+									'<div class="visual-text">'+
+										'<div class="text">'+
+											'<h2>Daily Devotion</h2>'+
+										'</div>'+
+									'</div>'+
+								'</div>'+
+						'</div>'+
+					'<center><h2>'+response.message+'</h2></center>';			
+			}
+			
+			
 					$('#main').text('');
 					$('#main').append(html);
-	
-	
 			}
 			
 		});
@@ -300,7 +313,8 @@ newMONTH.push('<option value='+(i+1)+'>' + month_arr[i] + '</option>');
 					country: country
 				},
 				success: function (response) {
-					window.location.href = "http://localhost/elearning/public";
+					//window.location.href = "http://localhost/elearning/public";
+					location.reload();
 					console.log(response);
 				}
 			});
@@ -345,7 +359,7 @@ newMONTH.push('<option value='+(i+1)+'>' + month_arr[i] + '</option>');
 					password: password
 				},
 				success: function (response) {
-					window.location.href = "http://localhost:90/elearning/public";
+					location.reload();
 					console.log(response);
 				}
 			});
@@ -363,10 +377,10 @@ $('#video').click(function(e){
 		success: function (response) {
 			console.log(response.items);
 			var data = response.items;
-			var html = '<div class="visual add">'+
+			var html = '';/*'<div class="visual add">'+
 						'<img src="images/img13.png" class="img-responsive">'+
 						'<span class="name">Live Streaming</span>'+
-						'</div>';
+						'</div>';*/
 			html+= '<div class="container">'+
 					   	'<div class="twocols add">';
 			$.each(data,function(key,value){		
