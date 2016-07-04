@@ -351,24 +351,44 @@ newMONTH.push('<option value='+(i+1)+'>' + month_arr[i] + '</option>');
 			});
 		});
 });
-//Get all videos of this channel
 
-	var date = $('#date_time').val();
-	$('#video').click(function(e){
-		e.preventDefault();
-		$.ajax({
-			url: 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCrsnAHn3coN8gZD8WkJ66gg&type=video&key=AIzaSyBjlWl7HLLxgNnUvmmihnge0ZcalgNIoe8',
-			method: "GET",
-			dataType: "json",
-			data: {date: date},
-			success: function (response) {
-				console.log(response);
+//Get all videos of this channel
+$('#video').click(function(e){
+	e.preventDefault();
+	$.ajax({
+		url: 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCrsnAHn3coN8gZD8WkJ66gg&type=video&key=AIzaSyBjlWl7HLLxgNnUvmmihnge0ZcalgNIoe8',
+		method: "GET",
+		dataType: "json",
+		data: {date: date},
+		success: function (response) {
+			console.log(response.items);
+			var data = response.items;
+			var html = '<div class="visual add">'+
+						'<img src="images/img13.png" class="img-responsive">'+
+						'<span class="name">Live Streaming</span>'+
+						'</div>';
+			html+= '<div class="container">'+
+					   	'<div class="twocols add">';
+			$.each(data,function(key,value){		
 			
-				
-	
-	
-			}
+			html += '<div class="col">'+
+						'<div class="col-holder">'+
+								'<div class="img-holder">'+
+							'<iframe width="560" height="315" src="https://www.youtube.com/embed/'+value.id.videoId+'" frameborder="0" allowfullscreen></iframe>' +
+							'</div>';
+				html += '<span class="name">'+value.snippet.title+'</span>' +
+							'</div>' + 
+						'</div>';
+						
+				});
+				html+='</div>' +
+				 '</div>';
 			
-		});
+			$('#main').text('');
+			$('#main').append(html);
+
+
+		}
+	
 	});
-//https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCrsnAHn3coN8gZD8WkJ66gg&type=video&key=AIzaSyBjlWl7HLLxgNnUvmmihnge0ZcalgNIoe8
+});
