@@ -352,4 +352,23 @@ newMONTH.push('<option value='+(i+1)+'>' + month_arr[i] + '</option>');
 		});
 });
 //Get all videos of this channel
+
+	var date = $('#date_time').val();
+	$('#video').click(function(e){
+		e.preventDefault();
+		$.ajax({
+			url: 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCrsnAHn3coN8gZD8WkJ66gg&type=video&key=AIzaSyBjlWl7HLLxgNnUvmmihnge0ZcalgNIoe8',
+			method: "GET",
+			dataType: "json",
+			data: {date: date},
+			success: function (response) {
+				console.log(response);
+			
+				
+	
+	
+			}
+			
+		});
+	});
 //https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCrsnAHn3coN8gZD8WkJ66gg&type=video&key=AIzaSyBjlWl7HLLxgNnUvmmihnge0ZcalgNIoe8
