@@ -150,7 +150,7 @@ $(window).resize(function(){
 			data: {date: date},
 			success: function (response) {
 				console.log(response.message);
-			
+			if(response.message != 'Not Found any Prayer for the date'){
 				var html = '<div class="visual devotion">' +
 							'<img width="1131" height="214" class="img-responsive" src="images/img11.jpg">'+
 								'<div class="visual-holder">'+
@@ -175,10 +175,23 @@ $(window).resize(function(){
 							html+= '</article>'+
 						'</div>'+
 					'</div>';
+			}else{
+					 var html = '<div class="visual devotion">' +
+							'<img width="1131" height="214" class="img-responsive" src="images/img11.jpg">'+
+								'<div class="visual-holder">'+
+									'<div class="visual-text">'+
+										'<div class="text">'+
+											'<h2>Daily Devotion</h2>'+
+										'</div>'+
+									'</div>'+
+								'</div>'+
+						'</div>'+
+					'<center><h2>'+response.message+'</h2></center>';			
+			}
+			
+			
 					$('#main').text('');
 					$('#main').append(html);
-	
-	
 			}
 			
 		});
@@ -300,7 +313,8 @@ newMONTH.push('<option value='+(i+1)+'>' + month_arr[i] + '</option>');
 					country: country
 				},
 				success: function (response) {
-					window.location.href = "http://localhost/elearning/public";
+					//window.location.href = "http://localhost/elearning/public";
+					location.reload();
 					console.log(response);
 				}
 			});
@@ -345,11 +359,50 @@ newMONTH.push('<option value='+(i+1)+'>' + month_arr[i] + '</option>');
 					password: password
 				},
 				success: function (response) {
-					window.location.href = "http://localhost:90/elearning/public";
+					location.reload();
 					console.log(response);
 				}
 			});
 		});
 });
+
 //Get all videos of this channel
-//https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCrsnAHn3coN8gZD8WkJ66gg&type=video&key=AIzaSyBjlWl7HLLxgNnUvmmihnge0ZcalgNIoe8
+$('#video').click(function(e){
+	e.preventDefault();
+	$.ajax({
+		url: 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCrsnAHn3coN8gZD8WkJ66gg&type=video&key=AIzaSyBjlWl7HLLxgNnUvmmihnge0ZcalgNIoe8',
+		method: "GET",
+		dataType: "json",
+		data: {date: date},
+		success: function (response) {
+			console.log(response.items);
+			var data = response.items;
+			var html = '';/*'<div class="visual add">'+
+						'<img src="images/img13.png" class="img-responsive">'+
+						'<span class="name">Live Streaming</span>'+
+						'</div>';*/
+			html+= '<div class="container">'+
+					   	'<div class="twocols add">';
+			$.each(data,function(key,value){		
+			
+			html += '<div class="col">'+
+						'<div class="col-holder">'+
+								'<div class="img-holder">'+
+							'<iframe width="560" height="315" src="https://www.youtube.com/embed/'+value.id.videoId+'" frameborder="0" allowfullscreen></iframe>' +
+							'</div>';
+				html += '<span class="name">'+value.snippet.title+'</span>' +
+							'</div>' + 
+						'</div>';
+						
+				});
+				html+='</div>' +
+				 '</div>';
+			
+			$('#main').text('');
+			$('#main').append(html);
+
+
+		}
+	
+	});
+});
