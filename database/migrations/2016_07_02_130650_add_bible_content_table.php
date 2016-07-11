@@ -13,7 +13,7 @@ class AddBibleContentTable extends Migration
     public function up()
     {
         Schema::create('bible_content', function (Blueprint $table) {
-            $table->primary('id');
+            $table->increments('id');
             $table->integer('b');
             $table->integer('c');
             $table->integer('v');
