@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
-
+use Illuminate\Support\Facades\Redirect;
 class AuthController extends Controller
 {
     /*
@@ -83,10 +83,7 @@ class AuthController extends Controller
         $validation = Validator::make($request,$rules);
         
         if ($validation->fails()) {
-            $user['code'] = 105;
-            $user['message'] = 'Insufficient Parameters';
-            return Response::json($user);
-            // return message redirect back
+            return Redirect::back()->withErrors(['email', 'These credentials do not match our records.']);
         }
         
         if (Auth::attempt(['email' => $request['email'], 'password' => $request['password'],'usergroups_id'=>1])) {
@@ -95,15 +92,14 @@ class AuthController extends Controller
         else if (Auth::attempt(['email' => $request['email'], 'password' => $request['password'],'usergroups_id'=>2])) {
             return redirect()->to('admin/');
         }
-        else{
+        else {
             return redirect()->to('/');
         }
-        return Response::json($user);
           
     }
     public function logout(){
         Auth::logout();
         
-        return redirect()->to('/');
+        return redirect()->to('/admin/login');
     }
 }

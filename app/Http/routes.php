@@ -1,26 +1,8 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
 
 Route::get('/' , function(){
-//    if(Auth::check()){
-//        
-//        if(Auth::user()->usergroups_id == 1 || Auth::user()->usergroups_id == 2){
-//             return redirect('/admin');
-//        }
-        
-        return view('user.index'); 
-//    }
-//    return view('user.index');    
+        return view('user.index');    
 });
 
 Route::get('/logout', function(){
@@ -28,20 +10,19 @@ Route::get('/logout', function(){
     return redirect('/');
 });
 
+
+//----------Password Reset
+Route::get('/password/reset','Auth\PasswordController@showResetForm');
+Route::post('/password/email','Auth\PasswordController@sendResetLinkEmail');
+
+
+//---------Admin Logout Logins
 Route::get('/admin/login','Auth\AuthController@getlogin');
 Route::post('/admin/login','Auth\AuthController@postlogin');
 Route::get('/admin/logout','Auth\AuthController@logout');
-//Route::get('/admin', function(){
-//    if(Auth::check()){
-//        return view('home');
-//    }
-//    else{
-//        return  Redirect::to('/admin/login');
-//    }
-//});
 
 
-//Mobile Api Routes
+//---------Front End & Mobile Api Routes
 Route::post('api/users/register','UsersController@store');
 Route::post('api/users/login','UsersController@login');
 
@@ -49,6 +30,10 @@ Route::group(['prefix' => 'api'], function () {
     Route::get('users/all','UsersController@show');    
     Route::get('books/all','BooksController@show');
     Route::get('banner/all','BannerController@show');
+    Route::get('bible/chapters','BibleController@showChapters');
+    Route::get('bible/books','BibleController@showBooks');
+    Route::get('bible/verses','BibleController@showVerses');
+    Route::get('bible/search','BibleController@searchBible');
     Route::get('audio/all','AudiosController@show');
     Route::get('audio/category','AudiosController@showbyCategory');
     Route::get('audio/category/list','AudioCategoryController@showCategorylist');
@@ -61,11 +46,13 @@ Route::group(['prefix' => 'api'], function () {
 });
 
 
-//------->> All Admin Routes
+//--------------- All Admin Routes ------->>
 
 Route::group(['prefix' => 'admin', 'middleware'=> 'auth'], function () {
     
-    Route::get('/',function(){return view('home');});
+    Route::get('/',function(){
+        return view('home');
+    });
     //Book -----
     Route::resource('/books', 'BooksController');
     Route::any('/updatebooks/{id}', 'BooksController@updateBook');
@@ -100,16 +87,7 @@ Route::group(['prefix' => 'admin', 'middleware'=> 'auth'], function () {
     Route::resource('/category', 'AudioCategoryController');
 
 });
-//-------->>
-
-//Route::get('read','HomeController@getBooks'); 
-//Route::get('video','HomeController@getVideo'); 
-//Route::get('radio','HomeController@getRadio'); 
-//Route::get('live','HomeController@getBooks'); 
-//Route::get('signup','HomeController@getSignup'); 
-//Route::get('devotion','HomeController@getDevotion'); 
-//Route::get('donation','HomeController@getDonation');
-//Route::get('livestream','HomeController@getLivestream');
+//------------End Admin Routes---------->>
 
 
 Route::get('protected', ['middleware' => ['auth', 'admin'], function() {

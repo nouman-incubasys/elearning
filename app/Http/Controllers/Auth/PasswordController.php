@@ -29,4 +29,13 @@ class PasswordController extends Controller
     {
         $this->middleware('guest');
     }
+    
+    public function getEmail()
+    {
+        return $this->showLinkRequestForm();
+    }
+    
+    public function ok() {
+        die('sd');
+    }
 }
