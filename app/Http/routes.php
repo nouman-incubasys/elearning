@@ -12,9 +12,9 @@ Route::get('/logout', function(){
 
 
 //----------Password Reset
-Route::get('/password/reset','Auth\PasswordController@showResetForm');
+Route::get('/password/reset/{token?}','Auth\PasswordController@showResetForm');
 Route::post('/password/email','Auth\PasswordController@sendResetLinkEmail');
-
+Route::post('/password/reset','Auth\PasswordController@reset');   
 
 //---------Admin Logout Logins
 Route::get('/admin/login','Auth\AuthController@getlogin');
