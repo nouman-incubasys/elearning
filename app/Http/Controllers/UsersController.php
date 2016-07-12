@@ -41,7 +41,14 @@ class UsersController extends Controller
         $rules = [
             'name' => 'required',
             'email' => 'email',
-            'password' => 'required'
+            'password' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'country' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'country' => 'required',
+            'gender' => 'required',
         ];
         $validation = Validator::make($request,$rules);
         
