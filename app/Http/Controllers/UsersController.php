@@ -47,7 +47,7 @@ class UsersController extends Controller
             'country' => 'required',
             'address' => 'required',
             'city' => 'required',
-            'country' => 'required',
+            'birthdate' => 'required',
             'gender' => 'required',
         ];
         $validation = Validator::make($request,$rules);
@@ -57,8 +57,8 @@ class UsersController extends Controller
             $user['message'] = 'Insufficient Parameters';
             return Response::json($user);
         }
-        $exist = User::whereEmail($request['email'])->first();;
-//        die($exist);
+        $exist = User::whereEmail($request['email'])->first();
+        
         if(!empty($exist)){
             $user['code'] = 100;
             $user['message'] = 'User Already Exist';

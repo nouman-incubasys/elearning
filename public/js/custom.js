@@ -222,7 +222,7 @@ newMONTH.push('<option value='+(i+1)+'>' + month_arr[i] + '</option>');
 					'<form class="login-form signup-form" action="" method="post">'+
 						'<fieldset>'+
 							'<strong class="title">Sign up to <span><b>PB</b> Live</span></strong>'+
-							'<input id="name" type="text" placeholder="Name" name="name">'+
+							'<input id="name" type="text" placeholder="Name" name="name" required="required">'+
 							'<div class="row radio-btns">'+
 								'<strong>Gender</strong>'+
 								'<label for="male" name="male" id="male">'+
@@ -234,24 +234,24 @@ newMONTH.push('<option value='+(i+1)+'>' + month_arr[i] + '</option>');
 							'</div>'+
 							'<div class="row bday">'+
 								'<strong>Date of birth</strong>'+
-								'<select name="day" class="day" id="day">'+
-									'<option selected="">Day</option>'+
+								'<select name="day" class="day" id="day" required="required">'+
+									'<option value="" selected="">Day</option>'+
 								'</select>'+
-								'<select name="month" class="month" id="month">'+
+								'<select name="month" class="month" id="month" required="required">'+
 									'<option selected="">Month</option>'+
 								'</select>'+
-								'<select name="year" id="year">'+
+								'<select name="year" id="year" required="required">'+
 									'<option selected="">Year</option>'+
 								'</select>'+
 							'</div>'+
-							'<input type="email" placeholder="Email" name="email" id="email">'+
-							'<input type="password" placeholder="Password" name="password" id="password">'+
-							'<textarea placeholder="Address" name="address" id="address"></textarea>'+
+							'<input type="email" placeholder="Email" name="email" id="email" required="required">'+
+							'<input type="password" placeholder="Password" name="password" id="password" required="required">'+
+							'<textarea placeholder="Address" name="address" id="address" required="true"></textarea>'+
 							'<div class="row region">'+
-								'<select name="country" id="country">'+
+								'<select name="country" id="country" required="true">'+
 									'<option selected>Country</option>'+
 								'</select>'+
-								'<input type="text" name="city" placeholder="City" id="city">'+
+								'<input type="text" name="city" placeholder="City" id="city" required="required">'+
 							'</div>'+
 							'<div class="forgot">'+
 								'<a href="forgot.html">Forgot Password?</a>'+
@@ -296,6 +296,10 @@ newMONTH.push('<option value='+(i+1)+'>' + month_arr[i] + '</option>');
 			var city = $('#city').val();
 			var country = $('#country').val();
 			
+                        if(name=='' || password=='' || gender=='' || day=='' || month=='' || year=='' || email=='' || address=='' || city=='' || country==''){
+                            alert('All fields are required to fill');
+                            return false;
+                        }
 			
 			
 			$.ajax({
