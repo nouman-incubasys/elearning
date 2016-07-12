@@ -50,9 +50,9 @@ class UsersController extends Controller
             $user['message'] = 'Insufficient Parameters';
             return Response::json($user);
         }
-        $exist = User::whereEmail($request['email']);
-        
-        if($exist){
+        $exist = User::whereEmail($request['email'])->first();;
+//        die($exist);
+        if(!empty($exist)){
             $user['code'] = 100;
             $user['message'] = 'User Already Exist';
             return Response::json($user);
