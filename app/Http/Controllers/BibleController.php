@@ -62,9 +62,8 @@ class BibleController extends Controller
             $data['message'] = 'Insufficient Parameter';
             return Response::json($data); 
         }
-        
         $bible['code'] = 200;
-        $bible['message'] = Bible::whereB($input['book'])->wherec($input['chapter'])->wheret($input['verse'])->first();
+        $bible['message'] = Bible::whereB($input['book'])->wherec($input['chapter'])->where('t', 'like', '%'.$input['verse'].'%')->simplepaginate(5);
         
         if(empty($bible['message'])){
             $bible['code'] = 104;
