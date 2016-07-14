@@ -48,6 +48,7 @@ Route::group(['prefix' => 'api'], function () {
     Route::get('blog/allposts','BlogsController@showBlogs');
     Route::get('blog/categories','BlogsController@showCategories');
     Route::get('blog/byCategory','BlogsController@showPostByCategory');
+    Route::post('password/email','Auth\PasswordController@sendResetLinkEmail');
 });
 
 
