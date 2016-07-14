@@ -45,7 +45,14 @@
                 </div>
             </div>
         </header>
-        
+        <div class="loader"></div>
+		<!--<div id="loading">
+        	<div class="loader-holder">
+            	<div class="img-holder">
+		        	<img src="images/loader2.gif">
+                </div>
+           </div>
+        </div>-->
         <div id="main">
         @yield('content')
         </div>
@@ -72,6 +79,24 @@
         </div>
     </div>
     <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+
     <script type="text/javascript" src="js/custom.js"></script>
 </body>
+<script>
+$(document).ready(function(){
+	$('#loading').hide();
+	$(this)
+	//	.hide()
+		.ajaxStart(function() {
+//			$('#loading').show();
+			$('.loader').addClass('add');
+			$('.loader').show(500);
+		})
+		.ajaxStop(function() {
+//			$('#loading').hide();
+			$('.loader').removeClass('add');
+			$('.loader').css('display', 'none');
+		});
+});
+</script>
 </html>

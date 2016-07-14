@@ -22,12 +22,14 @@ $(document).ready(function(){
 		$('#audio').attr('src',abc);
 	  });
 	});
-        
-        //Dropdown for Logout
-        $('.drop_opener').click(function(e){
-            e.preventDefault();
-            $('.drop_down').slideToggle(500);
-        });
+	//Dropdown for Logout
+	$('.drop_opener').click(function(e){
+		e.preventDefault();
+		$('.drop_down').slideToggle(500);
+	});
+	//Loader top padding
+	var header_height = $('#header').outerHeight();
+	$('.loader-holder .img-holder').css('padding-top', header_height);
 });
 $(window).resize(function(){
 	//WINDOW WIDTH
@@ -42,11 +44,7 @@ $(window).resize(function(){
 });
 /****************************************************************/
 /****************************************************************/
-
-
-	
 	//Ajax calling the content from diffrent pages
-	
 	$('#read').click(function(e){
 		e.preventDefault();
 		$.ajax({
@@ -63,7 +61,7 @@ $(window).resize(function(){
 					
 					});
 				var html = '<div class="visual add">' +
-							'<img src="images/img5.jpg" width="813" height="332" class="img-responsive">'+
+							'<a href="#" onclick="bibleBooks()" ><img src="images/img5.jpg" width="813" height="332" class="img-responsive"></a>'+
 							'<span class="name">The Bible</span>'+
 						'</div>'+
 						'<div class="container">'+
@@ -82,19 +80,25 @@ $(window).resize(function(){
 						'</div>';
 						$('#main').text('');
 						$('#main').append(html);
-	
-	
 			}
 		});
 	});
+	
+	
 	function clicked(){
 		$('.info h2 .audio-tag').on('click',function(e){
 			e.preventDefault();
+			var title = $(this).text();
+			var author = $(this).closest('li').find('.author').text();
 			var audio_path = $(this).attr('value');
-	console.log(audio_path);		
-			$('.audio_player').attr('src',audio_path);
+			var current_icon = $(this).attr('file_art');
+			$('#audio').attr('src',audio_path);
+			$('.album_icon img').attr('src',current_icon);
+			$('.txt strong').text(title);
+			$('.txt span').text(author);
 		});
-	}		
+	}
+	
 	$('#radio').click(function(e){
 		e.preventDefault();
 		$.ajax({
@@ -104,21 +108,23 @@ $(window).resize(function(){
 			success: function (response) {
 				console.log(response.message);
 				var data = response.message.data;
-				$.each(data,function(key,value){
-						//console.log(key);
-						console.log(value);
-						
-					
-					});
+				
 				var html = '<ul class="list-none songs">';
+							title = new Array();
+							file = new Array();
+							art = new Array();
+							author = new Array();
 							
 							$.each(data,function(key,value){
 				
-								file = value.audio_file;
+								file[key] = value.audio_file;
+								title[key] = value.title;
+								author[key] = value.vocalist;
+								art[key] = value.album_art;
 								html += '<li class="songs-li">'+
 									'<div class="song-photo"><img src="'+value.album_art+'" width="398" height="313" alt="image description" class="img-responsive"></div>'+
 									'<div class="info">'+
-										'<h2 class="active"><a class="audio-tag" onclick="clicked();" value="'+file+'">'+value.title+'</a></h2>'+
+										'<h2 class="active"><a class="audio-tag" onclick="clicked();" file_art="'+value.album_art+'" value="'+file[key]+'">'+value.title+'</a></h2>'+
 										'<span class="author">'+value.vocalist +'</span>'+
 										'<em class="time">30:00 min</em>'+
 									'</div>'+
@@ -128,14 +134,25 @@ $(window).resize(function(){
 								
 						html +=	'</ul>';
 						html += '<div class="player-holder">'+
-									'<audio autoplay="false" type="audio/mpeg" controls="" tabindex="0" preload="auto" id="audio" src='+ file +'>'+
-										'<source class="audio_player" src="songs/1.mp3" type="audio/mp3"></source>'+
-										"Sorry, your browser does not support HTML5 audio."+
-									'</audio>'+
+									'<div class="container">'+
+										'<audio type="audio/mpeg" id="audio_player" controls="" autoplay type="audio/mpeg" tabindex="0" preload="auto" id="audio" src='+ file[0] +'>'+
+											'<source class="audio_player" src="songs/1.mp3" type="audio/mp3"></source>'+
+											"Sorry, your browser does not support HTML5 audio."+
+										'</audio>'+
+										'<div class="current_song">'+
+											'<div class="album_icon">'+
+												'<img id="album_art" src="'+ art[0] +'" >'+
+											'</div>'+
+											'<div class="txt">'+
+												'<strong>'+title[0]+'</strong>'+
+												'<span>'+author[0]+'</span>'
+											'</div>'+
+										'</div>'
+									'</div>'+
 								'</div>';
 						$('#main').text('');
 						$('#main').append(html);
-	
+	console.log(title);
 	
 			}
 		});
@@ -410,3 +427,42 @@ $('#video').click(function(e){
 	
 	});
 });
+
+function bibleBooks(){
+	$.ajax({
+		url: 'api/bible/books',
+		method: "GET",
+		dataType: "json",
+		success: function (response) {
+			
+			var data = response.message;
+				var html = '<div class="container">'+
+				'<div class="twocols add books">';
+				
+					$.each(data,function(key,value){
+					html += '<div class="col">'+
+								'<div class="col-holder">'+
+									'<div class="name-area">'+
+										'<div class="name-holder">'+
+											'<h2>'+value.n+'</h2>'+
+										'</div>'+
+									'</div>'+
+								'</div>'+
+								'<span class="name">'+value.n+'</span>'+
+							'</div>';
+					});
+			html +=	'</div>'+
+			'</div>';
+			$('#main').text('');
+			$('#main').append(html);	
+		}
+		
+		
+		
+		
+		
+	});
+	
+
+
+}
