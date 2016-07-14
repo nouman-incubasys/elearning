@@ -18,6 +18,7 @@ class VerifyCsrfToken extends BaseVerifier
         'api/users/login',
         'api/dailyprayer/search{date}',
         'api/comment/store',
-        'api/bible/booksearch'
+        'api/bible/booksearch',
+        'api/donation/save'
     ];
 }

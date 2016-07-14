@@ -65,7 +65,7 @@ class BibleController extends Controller
         $bible['code'] = 200;
         $bible['message'] = Bible::whereB($input['book'])->wherec($input['chapter'])->where('t', 'like', '%'.$input['verse'].'%')->simplepaginate(5);
         
-        if(empty($bible['message'])){
+        if(empty($bible['message'][0])){
             $bible['code'] = 104;
             $bible['message'] = 'No Verse Found';
         }

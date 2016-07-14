@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddCommentsTable extends Migration
+class AddDonationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,9 +12,11 @@ class AddCommentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('donations', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('comment');
+            $table->string('transaction_id');
+            $table->string('payment_status');
+            $table->integer('amount');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
@@ -28,6 +30,6 @@ class AddCommentsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('comments');
+        Schema::drop('donations');
     }
 }

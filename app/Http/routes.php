@@ -43,6 +43,8 @@ Route::group(['prefix' => 'api'], function () {
     Route::get('books/search','BooksController@bookSearch');
     Route::post('comment/store','CommentsController@store');
     Route::get('settings/store','SettingsController@storeSetting');
+    Route::post('comment/store','CommentsController@store');
+    Route::post('donation/save','DonationsController@saveTransaction');
 });
 
 
@@ -86,7 +88,17 @@ Route::group(['prefix' => 'admin', 'middleware'=> 'auth'], function () {
     Route::any('/category/edit/{id}', 'AudioCategoryController@updateCategory');
     Route::resource('/category', 'AudioCategoryController');
 
+    //Blog  -----
+    Route::get('/delete_blog/{id}', 'BlogsController@DeleteBlog');
+    Route::any('/blog/edit/{id}', 'BlogsController@updateBlog');
+    Route::resource('/blog', 'BlogsController');
+    
+    //Blog Category -----
+    Route::any('/blogcategory/edit/{id}', 'BlogCategoriesController@update_blog_category');
+    Route::resource('/blogcategory', 'BlogCategoriesController');
+    Route::get('/delete_blog_category/{id}', 'BlogCategoriesController@delete_blog_category');
 });
+
 //------------End Admin Routes---------->>
 
 

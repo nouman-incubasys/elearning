@@ -49,8 +49,9 @@ class DailyPrayerController extends Controller
     }
     
     public function show() {
+        $daily['code'] = 200;
         $daily['message'] = Dailyprayer::paginate(10);
-        return $daily;
+        return Response::json($daily);
     }
     
     public function updatePrayer($id)

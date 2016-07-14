@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddCommentsTable extends Migration
+class AddBlogCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,9 @@ class AddCommentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('blog_category', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('comment');
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('category');
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ class AddCommentsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('comments');
+        Schema::drop('blog_category');
     }
 }
