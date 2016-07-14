@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">Edit Category</div>
+                <div class="panel-heading">Edit Blog Category</div>
             </div>
         </div>
         
@@ -14,9 +14,9 @@
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                        
                 <div class="form-group">    
-                    <label class="control-label col-sm-2" for="email">Edit Category</label>
+                    <label class="control-label col-sm-2" for="email">Edit Blog Category</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" name="category" value="{{$category['category']}}" required>
+                        <input type="text" class="form-control" name="blog_category" value="{{$blog_category['category']}}" required>
                     </div>
                 </div>
                 

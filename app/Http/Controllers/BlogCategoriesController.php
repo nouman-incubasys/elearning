@@ -40,4 +40,19 @@ class BlogCategoriesController extends Controller
         $data['blog_category'] = BlogCategory::find($id);
         return view('blogcategory.edit')->with($data);
     }
+    
+    public function update_blog_category($id) {
+        $input = Request::all();
+        
+        $book = BlogCategory::find($id);
+        $book->category = $input['blog_category'];
+        $book->update();
+        return redirect('/admin/blogcategory');
+    }
+    
+    public function delete_blog_category($id) {
+        $result = BlogCategory::find($id);
+        $result->delete();
+        return redirect('/admin/blogcategory');
+    }
 }
