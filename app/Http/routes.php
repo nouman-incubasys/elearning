@@ -45,6 +45,9 @@ Route::group(['prefix' => 'api'], function () {
     Route::get('settings/store','SettingsController@storeSetting');
     Route::post('comment/store','CommentsController@store');
     Route::post('donation/save','DonationsController@saveTransaction');
+    Route::get('blog/allposts','BlogsController@showBlogs');
+    Route::get('blog/categories','BlogsController@showCategories');
+    Route::get('blog/byCategory','BlogsController@showPostByCategory');
 });
 
 

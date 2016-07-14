@@ -77,4 +77,39 @@ class BlogsController extends Controller
         return redirect('/admin/blog');
     }
     
+    public function showBlogs() {
+        
+        $blog['code'] = 200;
+        $blog['message'] = Blog::simplepaginate(5);
+        
+        return Response::json($blog);
+        
+    }
+    
+    public function showCategories() {
+        
+        $blog_cat['code'] = 200;
+        $blog_cat['message'] = BlogCategory::simplepaginate(5);
+        
+        return Response::json($blog_cat);
+        
+    }
+    
+    public function showPostByCategory() {
+        
+        $input = Input::all();
+        
+        if(!isset($input['category']) || empty($input['category'])){
+            $cat['code'] = 105;
+            $cat['message'] = "InSufficient Parameters";
+            return Response::json($cat);
+        }
+        
+        $result = BlogCategory::whereCategory($input['category'])->first();
+        $cat['code'] = 200;
+        $cat['message'] = Blog::whereCategory_id($result['id'])->get();
+        
+        return Response::json($cat);
+    }
+    
 }

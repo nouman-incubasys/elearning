@@ -38,15 +38,30 @@ class AudiosController extends Controller
     
     public function showbyCategory() {
         $input = Input::all();
+        
+        if(!isset($input['category']) || empty($input['category'])){
+            $cat['code'] = 105;
+            $cat['message'] = "InSufficient Parameters";
+            return Response::json($cat);
+        }
+        
         $result = AudioCategory::whereCategory($input['category'])->first();
-        $cat = Audio::whereCategory_id($result['id'])->get();
+        $cat['code'] = 200;
+        $cat['message'] = Audio::whereCategory_id($result['id'])->get();
         
         return Response::json($cat);
     }
     
     public function showbyCategoryId() {
         $input = Input::all();
-        $cat = Audio::whereCategory_id($input['category'])->get();
+        
+        if(!isset($input['category']) || empty($input['category'])){
+            $cat['code'] = 105;
+            $cat['message'] = "InSufficient Parameters";
+            return Response::json($cat);
+        }
+        $cat['code'] = 200;
+        $cat['message'] = Audio::whereCategory_id($input['category'])->get();
         
         return Response::json($cat);
     }
