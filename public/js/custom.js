@@ -448,7 +448,6 @@ function bibleBooks(){
 										'</div>'+
 									'</div>'+
 								'</div>'+
-								'<span class="name">'+value.n+'</span>'+
 							'</div>';
 					});
 			html +=	'</div>'+
