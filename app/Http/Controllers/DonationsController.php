@@ -33,7 +33,6 @@ class DonationsController extends Controller
         
         $response = json_decode($input['paypalResponse'])->response;
         $payment = json_decode($input['paypalResponse'])->payment;
-        dd($payment->amount);
         // Getting User data by Access token
         $user = User::whereAccess_token($input['access_token'])->first();
         
