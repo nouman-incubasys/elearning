@@ -47,7 +47,7 @@ class UsersController extends Controller
             'country' => 'required',
             'address' => 'required',
             'city' => 'required',
-            'birthdate' => 'required',
+            'birthday' => 'required',
             'gender' => 'required',
         ];
         $validation = Validator::make($request,$rules);
