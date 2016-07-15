@@ -438,13 +438,14 @@ function bibleBooks(){
 			var data = response.message;
 				var html = '<div class="container">'+
 				'<div class="twocols add books">';
-				
+				    bible_books = new Array();
 					$.each(data,function(key,value){
+					bible_books[key] = value.n;	
 					html += '<div class="col">'+
 								'<div class="col-holder">'+
 									'<div class="name-area">'+
 										'<div class="name-holder">'+
-											'<h2>'+value.n+'</h2>'+
+											'<a class="book heading" book_name="'+value.n+'" book_id="'+ value.b +'">'+value.n+'</a>'+
 										'</div>'+
 									'</div>'+
 								'</div>'+
@@ -453,7 +454,8 @@ function bibleBooks(){
 			html +=	'</div>'+
 			'</div>';
 			$('#main').text('');
-			$('#main').append(html);	
+			$('#main').append(html);
+			ShowChapters();	
 		}
 		
 		
@@ -464,4 +466,201 @@ function bibleBooks(){
 	
 
 
+}
+
+	
+function ShowChapters(bookname){
+	
+	var book = $('.book').attr('book_id');
+	
+	$('.name-holder > .book').on("click",function(e){
+		e.preventDefault();
+		var name = $(this).attr('book_name');
+	
+	
+	var book_name = name;
+	
+	$.ajax({
+		url: 'api/bible/allbookchapters',
+		method: "GET",
+		dataType: "json",
+		data: {book: book},
+		success: function (response) {
+			var data = response.book;
+			
+			
+			var html = '<section class="chapters">';
+			html += '<aside id="sidebar">'+
+		                	'<header class="header">'+
+                    	'<h2>'+book_name+'</h2>'+
+                    '</header>'+
+                    '<div class="dropdowns">'+
+                    	'<ul class="list-none">';
+			$.each(data,function(key,value){
+				html +=	'<li '+((key == book_name) ? 'class="active"' : '')+'>'+
+                            '<a href="#" onclick="ShowNewChapters('+key+')"  class="drop-opener"  '+((key == book_name) ? 'class="active"' : '')+'>'+key+'</a>'+
+			                   	'<ul class="inner-drop list-none">';
+									if(key == book_name){
+										for (i = 1; i <= value; i++) {
+											html += '<li><a  href="#" onclick="showContent('+i+')" book_id="'+book+'" book_name="'+key+'" chapter_content="'+ i +'">'+ i +'</a></li>';
+										}
+									}
+					html+=	'</ul>'+
+                          '</li>';
+						  });
+						  
+			html +=			'</ul>'+
+                    	'</div>'+
+                	'</aside>'+
+					'<article id="content"></article>'+
+				'</section>';
+				
+				showContentbyDefault(book);
+				
+			$('#main').text('');
+			$('#main').append(html);
+		}
+	});
+	
+	});
+}
+
+function ShowNewChapters(key){
+	alert(key);
+	
+	return false;
+	var book = $('.book').attr('book_id');
+	
+	$('.name-holder > .book').on("click",function(e){
+		e.preventDefault();
+		var name = $(this).attr('book_name');
+	
+	
+	var book_name = name;
+	
+	$.ajax({
+		url: 'api/bible/allbookchapters',
+		method: "GET",
+		dataType: "json",
+		data: {book: book},
+		success: function (response) {
+			var data = response.book;
+			
+			
+			var html = '<section class="chapters">';
+			html += '<aside id="sidebar">'+
+		                	'<header class="header">'+
+                    	'<h2>'+book_name+'</h2>'+
+                    '</header>'+
+                    '<div class="dropdowns">'+
+                    	'<ul class="list-none">';
+			$.each(data,function(key,value){
+				html +=	'<li '+((key == book_name) ? 'class="active"' : '')+'>'+
+                            '<a href="#" onclick="ShowNewChapters()" class="drop-opener"  '+((key == book_name) ? 'class="active"' : '')+'>'+key+'</a>'+
+			                   	'<ul class="inner-drop list-none">';
+									if(key == book_name){
+										for (i = 1; i <= value; i++) {
+											html += '<li><a  href="#" onclick="showContent('+i+')" book_id="'+book+'" book_name="'+key+'" chapter_content="'+ i +'">'+ i +'</a></li>';
+										}
+									}
+					html+=	'</ul>'+
+                          '</li>';
+						  });
+						  
+			html +=			'</ul>'+
+                    	'</div>'+
+                	'</aside>'+
+					'<article id="content"></article>'+
+				'</section>';
+				
+				showContentbyDefault(book);
+				
+			$('#main').text('');
+			$('#main').append(html);
+		}
+	});
+	
+	});
+}
+
+
+	//Chapters js
+	//function listeDroped(){
+		$(document).ready(function(){
+			
+		$('.drop-opener').on("click",function(e){
+			e.preventDefault();
+			$(this).removeClass('active');
+			$(this).parent('li').removeClass('active');
+			//e.preventDefault();
+			//$('#sidebar a.drop-opener').removeClass('active');
+		//$(this).addClass('active');
+//			$('#sidebar ul li').removeClass('active');
+	//		$(this).closest('li').addClass('active');
+		});
+		});
+		
+		
+		
+function showContent(i){
+	var book = $(".inner-drop a").attr("book_id");
+	var chapter = i;
+	$.ajax({
+		url: 'api/bible/verses',
+		method: "GET",
+		dataType: "json",
+		data : {book:book, chapter:chapter},
+			success: function (response) {
+				var html = '<a class="btn-sidebar" href="#">side opener</a>'+
+                	'<header class="header">'+
+                    	'<h2>Chapter '+chapter+'</h2>'+
+                    '</header>';
+				var count =0;
+					$.each(response.message,function(key,value){
+						count++;
+						  html += '<div class="content-txt">'+
+                    			'<p>'+count+'-'+ key+'</p>'+
+						 	' </div>';
+                  
+				});
+			$('#content').text('');
+			$('#content').append(html);
+				sideOpener();
+			}
+	});
+}
+
+function showContentbyDefault(book){
+	var book = book;
+	$.ajax({
+		url: 'api/bible/verses',
+		method: "GET",
+		dataType: "json",
+		data : {book:book, chapter:1},
+			success: function (response) {
+				var html = '<a class="btn-sidebar" href="#">side opener</a>'+
+                	'<header class="header">'+
+                    	'<h2>Chapter '+1+'</h2>'+
+                    '</header>';
+				var count =0;
+					$.each(response.message,function(key,value){
+						count++;
+						  html += '<div class="content-txt">'+
+                    			'<p>'+count+'-'+ key+'</p>'+
+						 	' </div>';
+                  
+				});
+			$('#content').text('');
+			$('#content').append(html);
+				sideOpener();
+			}
+	});
+}
+//For Sidebar opening on mobile devices
+function sideOpener(){
+	$('#content .btn-sidebar').on('click',function(e){
+		e.preventDefault();
+		console.log("asdfasdf");
+		$('.chapters #sidebar').toggleClass('active');
+	});
 }

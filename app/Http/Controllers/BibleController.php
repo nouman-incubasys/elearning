@@ -50,7 +50,7 @@ class BibleController extends Controller
         
         $bible['code'] = 200;
         $bible['message'] = Bible::whereB($input['book'])->wherec($input['chapter'])->pluck('c','t');
-        return Response::json($bible);
+		return Response::json($bible);
     }
     
     public function searchBible() {
