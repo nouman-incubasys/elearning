@@ -106,6 +106,7 @@ Route::group(['prefix' => 'admin', 'middleware'=> 'auth'], function () {
     //Instagram Settings  -----
     Route::get('/delete_insta_settings/{id}', 'InstaController@DeleteSetting');
     Route::get('/instagram/response', 'InstaController@getResponse');
+    Route::get('/instagram/access_token', 'InstaController@getToken');
     Route::any('/instagram/edit/{id}', 'InstaController@updateSettings');
     Route::resource('/instagram', 'InstaController');
 });

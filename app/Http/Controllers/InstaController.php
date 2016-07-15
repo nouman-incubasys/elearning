@@ -60,6 +60,30 @@ class InstaController extends Controller
     }
     
     public function getResponse() {
-        dd(Request::all());
+        
+        $setting = Instagram_setting::find(1);
+        
+        $input = Request::all();
+        if(!isset($input['code']) || empty($input['code'])){
+            
+        }
+        $code = $input['code'];
+        $client_id = $setting['client_id'];
+        $client_secret = $setting['client_secret'];
+        
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL,"https://api.instagram.com/oauth/access_token");
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS,
+                http_build_query(array('client_id' => $client_id,'client_secret' => $client_secret,'code' => $code,'redirect_uri' => url('/instagram/response'))));
+
+        // receive server response ...
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $server_output = curl_exec ($ch);
+
+        curl_close ($ch);
+        dd($ch);
     }
 }
