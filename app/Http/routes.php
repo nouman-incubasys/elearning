@@ -102,6 +102,12 @@ Route::group(['prefix' => 'admin', 'middleware'=> 'auth'], function () {
     Route::any('/blogcategory/edit/{id}', 'BlogCategoriesController@update_blog_category');
     Route::resource('/blogcategory', 'BlogCategoriesController');
     Route::get('/delete_blog_category/{id}', 'BlogCategoriesController@delete_blog_category');
+    
+    //Instagram Settings  -----
+    Route::get('/delete_insta_settings/{id}', 'InstaController@DeleteSetting');
+    Route::get('/instagram/response', 'InstaController@getResponse');
+    Route::any('/instagram/edit/{id}', 'InstaController@updateSettings');
+    Route::resource('/instagram', 'InstaController');
 });
 
 //------------End Admin Routes---------->>
