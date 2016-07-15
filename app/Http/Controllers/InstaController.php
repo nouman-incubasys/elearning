@@ -76,7 +76,7 @@ class InstaController extends Controller
         curl_setopt($ch, CURLOPT_URL,"https://api.instagram.com/oauth/access_token");
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS,
-                http_build_query(array('client_id' => $client_id,'grant_type' => 'authorization_code','client_secret' => $client_secret,'code' => $code,'redirect_uri' => url('admin/instagram/access_token'))));
+                http_build_query(array('client_id' => $client_id,'grant_type' => 'authorization_code','client_secret' => $client_secret,'code' => $code,'redirect_uri' => url('admin/instagram/response'))));
 
         // receive server response ...
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
