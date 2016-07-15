@@ -31,6 +31,7 @@ Route::group(['prefix' => 'api'], function () {
     Route::get('books/all','BooksController@show');
     Route::get('banner/all','BannerController@show');
     Route::get('bible/chapters','BibleController@showChapters');
+    Route::get('bible/allbookchapters','BibleController@show_books_chapter');
     Route::get('bible/books','BibleController@showBooks');
     Route::get('bible/verses','BibleController@showVerses');
     Route::get('bible/search','BibleController@searchBible');

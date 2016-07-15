@@ -72,4 +72,14 @@ class BibleController extends Controller
         
         return Response::json($bible);
     }
+    
+    public function show_books_chapter() {
+        
+//        $result = BibleChapter::select('bible_content.c')->join('bible_content', 'bible_chapter.b', '=', 'bible_content.b')->get();
+//        $result = Bible::join('bible_chapter', 'bible_content.b', '=', 'bible_chapter.b')->lists('bible_chapter.n','bible_content.c')->get();
+       
+        $result['book'] = Bible::lists('c','b');
+//        $result['book']['chapter'] = Bible::where
+        return Response::json($result);
+    }
 }
