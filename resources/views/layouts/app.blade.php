@@ -66,8 +66,9 @@
                     <li><a href="{{url('/admin/category')}}" >Audio Category</a></li>
                     <li><a href="{{url('/admin/banner')}}" >Banners</a></li>
                     <li><a href="{{url('/admin/settings')}}" >Settings</a></li>
+                    <li><a href="{{url('/admin/instagram')}}" >Instagram Settings</a></li>
                     <li><a href="{{url('/admin/blog')}}" >Blogs</a></li>
-                    <li><a href="{{url('/admin/blog-category')}}" >Blog Category</a></li>
+                    <li><a href="{{url('/admin/blogcategory')}}" >Blog Category</a></li>
                     <!-- Authentication Links -->
                     
                         <li class="dropdown">

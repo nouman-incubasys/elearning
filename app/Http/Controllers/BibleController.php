@@ -42,7 +42,7 @@ class BibleController extends Controller
         
         $input = Input::all();
         
-        if(!isset($input['book']) || empty($input['book'])){
+        if(!isset($input['book']) || empty($input['book']) || !isset($input['chapter']) || empty($input['chapter'])){
             $data['code'] = 105;
             $data['message'] = 'Insufficient Parameter';
             return Response::json($data); 
