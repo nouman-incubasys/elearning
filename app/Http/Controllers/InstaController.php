@@ -84,7 +84,7 @@ class InstaController extends Controller
         $server_output = curl_exec ($ch);
 
         curl_close ($ch);
-        $setting->access_token = $server_output->access_token;
+        $setting->access_token = json_decode($server_output)->access_token;
         $setting->save();
         return redirect('/admin/instagram');
     }
