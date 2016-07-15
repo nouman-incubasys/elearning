@@ -84,6 +84,6 @@ class InstaController extends Controller
         $server_output = curl_exec ($ch);
 
         curl_close ($ch);
-        dd($ch);
+        dd($server_output);
     }
 }
