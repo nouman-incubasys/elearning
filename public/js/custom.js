@@ -166,8 +166,8 @@ $(window).resize(function(){
 			dataType: "json",
 			data: {date: date},
 			success: function (response) {
-				console.log(response.message);
 			if(response.message != 'Not Found any Prayer for the date'){
+					console.log(response.message);
 				var html = '<div class="visual devotion">' +
 							'<img width="1131" height="214" class="img-responsive" src="images/img11.jpg">'+
 								'<div class="visual-holder">'+
@@ -203,7 +203,7 @@ $(window).resize(function(){
 									'</div>'+
 								'</div>'+
 						'</div>'+
-					'<center><h2>'+response.message+'</h2></center>';			
+					'<center><h2>No Devotion for Today</h2></center>';			
 			}
 			
 			
