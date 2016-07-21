@@ -18,8 +18,8 @@
                 <div class="header-holder">
                     <ul class="client-btns list-none">
                         @if(Auth::guest())
-                        <li><a href="{{url('/signup')}}" id="signup">Sign up</a></li>
-                        <li><a href="{{url('/login')}}" id="login">Sign in</a></li>
+                        <li><a href="javascript:void(0)" class="signup" onclick="signup_clicked()">Sign up</a></li>
+                        <li><a href="javascript:void(0)" class="login" onclick="login_clicked()">Sign in</a></li>
                         @else
                         <li>
                             <a href="#" class="drop_opener">
@@ -37,7 +37,7 @@
                             <li><a id="read" href="#">PB Library</a></li>
                             <li><a id="radio" href="#">PB Radio</a></li>
                             <li><a id="video" href="#">PB TV</a></li>
-                            <li><a id="devotion" href="#">Daily Devotion</a></li>
+                            <li><a id="devotion" class="devotion" href="#">Daily Devotion</a></li>
                             <li><a id="donate" href="#">Donate</a></li>
                             <li><a id="livestream" href="#">PB Live</a></li>
                         </ul>
