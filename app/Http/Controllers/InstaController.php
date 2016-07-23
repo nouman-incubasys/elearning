@@ -119,6 +119,6 @@ class InstaController extends Controller
         
         $data = json_decode($server_output)->data;
         
-        return Response::json($data);
+        return $data;
     }
 }
