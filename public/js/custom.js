@@ -1,11 +1,20 @@
 $(document).ready(function(){
+	//CLOSE MENU ON BURGER MENU WHILE CLICKED NAV ELEMENTS
+	$('#nav a, .client-btns a').click(function(){
+		if($(window).width() < 768){
+		$(this).removeClass('active');
+			$('.header-holder').slideUp(500);
+			$('#header .opener').removeClass('active');
+		}
+	});
+	
 	//BURGE MENU
 	$('#header .opener').click(function(e){
 		e.preventDefault();
 		$(this).toggleClass('active');
 		$('.header-holder').slideToggle(500);
 	});
-	
+		
 	//Add remove Class on nav anchors
 	$('#nav ul a').click(function(){
 		$('#nav ul li').removeClass('active');
@@ -31,6 +40,9 @@ $(document).ready(function(){
 	var header_height = $('#header').outerHeight();
 	$('.loader-holder .img-holder').css('padding-top', header_height);
 });
+
+
+
 $(window).resize(function(){
 	//WINDOW WIDTH
 	var win_width = $(window).width();
@@ -57,7 +69,6 @@ $(window).resize(function(){
 				$.each(data,function(key,value){
 						//console.log(key);
 						console.log(value);
-						
 					
 					});
 				var html = '<div class="visual add">' +
@@ -84,21 +95,7 @@ $(window).resize(function(){
 		});
 	});
 	
-	
-	function clicked(){
-		$('.info h2 .audio-tag').on('click',function(e){
-			e.preventDefault();
-			var title = $(this).text();
-			var author = $(this).closest('li').find('.author').text();
-			var audio_path = $(this).attr('value');
-			var current_icon = $(this).attr('file_art');
-			$('#audio').attr('src',audio_path);
-			$('.album_icon img').attr('src',current_icon);
-			$('.txt strong').text(title);
-			$('.txt span').text(author);
-		});
-	}
-	
+		
 	$('#radio').click(function(e){
 		e.preventDefault();
 		$.ajax({
@@ -124,13 +121,12 @@ $(window).resize(function(){
 								html += '<li class="songs-li">'+
 									'<div class="song-photo"><img src="'+value.album_art+'" width="398" height="313" alt="image description" class="img-responsive"></div>'+
 									'<div class="info">'+
-										'<h2 class="active"><a class="audio-tag" onclick="clicked();" file_art="'+value.album_art+'" value="'+file[key]+'">'+value.title+'</a></h2>'+
+										'<h2 class="active"><a class="audio-tag" onclick="clicked(this)" file_art="'+value.album_art+'" value="'+file[key]+'">'+value.title+'</a></h2>'+
 										'<span class="author">'+value.vocalist +'</span>'+
 										'<em class="time">30:00 min</em>'+
 									'</div>'+
 								'</li>';
 							});
-								
 								
 						html +=	'</ul>';
 						html += '<div class="player-holder">'+
@@ -152,13 +148,35 @@ $(window).resize(function(){
 								'</div>';
 						$('#main').text('');
 						$('#main').append(html);
-	console.log(title);
+				console.log(title);
 	
 			}
 		});
 	});
+	//close
+	function clicked(el){
+		console.log(el);
+			var title = $(el).text();
+			var author = $(el).closest('li').find('.author').text();
+			var audio_path = $(el).attr('value');
+			var current_icon = $(el).attr('file_art');
+			console.log(title);
+			console.log(author);
+			console.log(audio_path);
+			
+			$('#audio_player').attr('src',audio_path);
+			$('.album_icon img').attr('src',current_icon);
+			$('.txt strong').text(title);
+			$('.txt span').text(author);
+		
+	}
+
+	
+	
+	
+	
 	var date = $('#date_time').val();
-	$('#devotion').click(function(e){
+	$('.devotion').click(function(e){
 		e.preventDefault();
 		$.ajax({
 			url: 'api/dailyprayer/search',
@@ -166,8 +184,8 @@ $(window).resize(function(){
 			dataType: "json",
 			data: {date: date},
 			success: function (response) {
-				console.log(response.message);
 			if(response.message != 'Not Found any Prayer for the date'){
+					console.log(response.message);
 				var html = '<div class="visual devotion">' +
 							'<img width="1131" height="214" class="img-responsive" src="images/img11.jpg">'+
 								'<div class="visual-holder">'+
@@ -203,7 +221,7 @@ $(window).resize(function(){
 									'</div>'+
 								'</div>'+
 						'</div>'+
-					'<center><h2>'+response.message+'</h2></center>';			
+					'<center><h2>No Devotion for Today</h2></center>';			
 			}
 			
 			
@@ -214,10 +232,60 @@ $(window).resize(function(){
 		});
 	});
 	
+	//
 	
-	$('#signup').click(function(e){
-		e.preventDefault();
+	function login_clicked(){
+	var html = '<div class="container">'+
+					'<form class="login-form" action="#" method="post">'+
+						'<fieldset>'+
+							'<strong class="title">Sign in to <span><b>PB</b> Live</span></strong>'+
+							'<input type="text" placeholder="Email" id="email">'+
+							'<input type="password" placeholder="Password" id="password">'+
+							'<div class="forgot">'+
+								'<a href="forgot.html">Forgot Password?</a>'+
+							'</div>'+
+							'<div class="note">'+
+								'<input type="submit" value="Sign in">'+
+								'<em>or, <a onclick="signup_clicked()" href="javascript:void(0)" class="signup">Sign up</a> if you dont have an account.</em>'+
+							'</div>'+
+						'</fieldset>'+
+					'</form>'+
+				'</div>';
+			
+		$('#main').text('');
+		$('#main').append(html);
+		
+		$('.login-form :submit').click(function(e){
+			e.preventDefault();
+			
+			var email = $('#email').val();
+			var password = $('#password').val();
+			
+			$.ajax({
+				url: 'api/users/login',
+				method: "POST",
+				dataType: "json",
+				data:{
+					email: email,
+					password: password
+				},
+				success: function (response) {
+					location.reload();
+					console.log(response);
+				}
+			});
+		});
+}
+
+	//
+	
+	
+//	$('#abc').click(function(e){
+	//	alert();
+		//e.preventDefault();
 		// Countries
+		
+function signup_clicked(){
 var country_arr = new Array("Afghanistan", "Albania", "Algeria", "American Samoa", "Angola", "Anguilla", "Antartica", "Antigua and Barbuda", "Argentina", "Armenia", "Aruba", "Ashmore and Cartier Island", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "British Virgin Islands", "Brunei", "Bulgaria", "Burkina Faso", "Burma", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Central African Republic", "Chad", "Chile", "China", "Christmas Island", "Clipperton Island", "Cocos (Keeling) Islands", "Colombia", "Comoros", "Congo, Democratic Republic of the", "Congo, Republic of the", "Cook Islands", "Costa Rica", "Cote d'Ivoire", "Croatia", "Cuba", "Cyprus", "Czeck Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Europa Island", "Falkland Islands (Islas Malvinas)", "Faroe Islands", "Fiji", "Finland", "France", "French Guiana", "French Polynesia", "French Southern and Antarctic Lands", "Gabon", "Gambia, The", "Gaza Strip", "Georgia", "Germany", "Ghana", "Gibraltar", "Glorioso Islands", "Greece", "Greenland", "Grenada", "Guadeloupe", "Guam", "Guatemala", "Guernsey", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Heard Island and McDonald Islands", "Holy See (Vatican City)", "Honduras", "Hong Kong", "Howland Island", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Ireland, Northern", "Israel", "Italy", "Jamaica", "Jan Mayen", "Japan", "Jarvis Island", "Jersey", "Johnston Atoll", "Jordan", "Juan de Nova Island", "Kazakhstan", "Kenya", "Kiribati", "Korea, North", "Korea, South", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macau", "Macedonia, Former Yugoslav Republic of", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Man, Isle of", "Marshall Islands", "Martinique", "Mauritania", "Mauritius", "Mayotte", "Mexico", "Micronesia, Federated States of", "Midway Islands", "Moldova", "Monaco", "Mongolia", "Montserrat", "Morocco", "Mozambique", "Namibia", "Nauru", "Nepal", "Netherlands", "Netherlands Antilles", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Niue", "Norfolk Island", "Northern Mariana Islands", "Norway", "Oman", "Pakistan", "Palau", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Pitcaim Islands", "Poland", "Portugal", "Puerto Rico", "Qatar", "Reunion", "Romainia", "Russia", "Rwanda", "Saint Helena", "Saint Kitts and Nevis", "Saint Lucia", "Saint Pierre and Miquelon", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Scotland", "Senegal", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Georgia and South Sandwich Islands", "Spain", "Spratly Islands", "Sri Lanka", "Sudan", "Suriname", "Svalbard", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Tobago", "Toga", "Tokelau", "Tonga", "Trinidad", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "Uruguay", "USA", "Uzbekistan", "Vanuatu", "Venezuela", "Vietnam", "Virgin Islands", "Wales", "Wallis and Futuna", "West Bank", "Western Sahara", "Yemen", "Yugoslavia", "Zambia", "Zimbabwe");
 var newHTML = [];
 for (var i = 0; i < country_arr.length; i++) {
@@ -270,12 +338,9 @@ newMONTH.push('<option value='+(i+1)+'>' + month_arr[i] + '</option>');
 								'</select>'+
 								'<input type="text" name="city" placeholder="City" id="city" required="required">'+
 							'</div>'+
-							'<div class="forgot">'+
-								'<a href="forgot.html">Forgot Password?</a>'+
-							'</div>'+
 							'<div class="note">'+
 								'<input type="submit" value="Sign up">'+
-								'<em>or, <a href="login.html">Sign in</a> if you already have an account.</em>'+
+								'<em>or, <a href="#" class="login" onclick="login_clicked()">Sign in</a> if you already have an account.</em>'+
 							'</div>'+
 						'</fieldset>'+
 					'</form>';
@@ -340,52 +405,8 @@ newMONTH.push('<option value='+(i+1)+'>' + month_arr[i] + '</option>');
 				}
 			});
 		});
-});
+}
 
-
-	$('#login').click(function(e){
-		e.preventDefault();
-	var html = '<div class="container">'+
-					'<form class="login-form" action="#" method="post">'+
-						'<fieldset>'+
-							'<strong class="title">Sign in to <span><b>PB</b> Live</span></strong>'+
-							'<input type="text" placeholder="Email" id="email">'+
-							'<input type="password" placeholder="Password" id="password">'+
-							'<div class="forgot">'+
-								'<a href="forgot.html">Forgot Password?</a>'+
-							'</div>'+
-							'<div class="note">'+
-								'<input type="submit" value="Sign in">'+
-								'<em>or, <a href="signup.html">Sign up</a> if you dont have an account.</em>'+
-							'</div>'+
-						'</fieldset>'+
-					'</form>'+
-				'</div>';
-			
-		$('#main').text('');
-		$('#main').append(html);
-		
-		$('.login-form :submit').click(function(e){
-			e.preventDefault();
-			
-			var email = $('#email').val();
-			var password = $('#password').val();
-			
-			$.ajax({
-				url: 'api/users/login',
-				method: "POST",
-				dataType: "json",
-				data:{
-					email: email,
-					password: password
-				},
-				success: function (response) {
-					location.reload();
-					console.log(response);
-				}
-			});
-		});
-});
 
 //Get all videos of this channel
 $('#video').click(function(e){
@@ -513,8 +534,7 @@ function ShowChapters(bookname){
                     	'</div>'+
                 	'</aside>'+
 					'<article id="content"></article>'+
-				'</section>';
-				
+				'</section>';		
 				showContentbyDefault(book);
 				
 			$('#main').text('');
@@ -546,7 +566,6 @@ function ShowNewChapters(key){
 		success: function (response) {
 			var data = response.book;
 			
-			
 			var html = '<section class="chapters">';
 			html += '<aside id="sidebar">'+
 		                	'<header class="header">'+
@@ -572,7 +591,6 @@ function ShowNewChapters(key){
                 	'</aside>'+
 					'<article id="content"></article>'+
 				'</section>';
-				
 				showContentbyDefault(book);
 				
 			$('#main').text('');
@@ -583,21 +601,18 @@ function ShowNewChapters(key){
 	});
 }
 
-
 	//Chapters js
 	//function listeDroped(){
 		$(document).ready(function(){
-			
-		$('.drop-opener').on("click",function(e){
-			e.preventDefault();
-			$(this).removeClass('active');
-			$(this).parent('li').removeClass('active');
-			//e.preventDefault();
-			//$('#sidebar a.drop-opener').removeClass('active');
-		//$(this).addClass('active');
-//			$('#sidebar ul li').removeClass('active');
-	//		$(this).closest('li').addClass('active');
-		});
+			$('.drop-opener').on("click",function(e){
+				e.preventDefault();
+				$(this).removeClass('active');
+				$(this).parent('li').removeClass('active');
+				//$('#sidebar a.drop-opener').removeClass('active');
+			//$(this).addClass('active');
+	//			$('#sidebar ul li').removeClass('active');
+		//		$(this).closest('li').addClass('active');
+			});
 		});
 		
 		
@@ -628,6 +643,7 @@ function showContent(i){
 				sideOpener();
 			}
 	});
+	$('.chapters #sidebar').removeClass('active');
 }
 
 function showContentbyDefault(book){
@@ -663,4 +679,56 @@ function sideOpener(){
 		console.log("asdfasdf");
 		$('.chapters #sidebar').toggleClass('active');
 	});
+}
+
+
+//Ajax calling for live stream
+	$('#livestream').click(function(e){
+		e.preventDefault();
+				var html = '<div class="container">'+
+							'<div class="live-stream">'+
+								'<strong>Live Streaming...</strong>'+
+								'<iframe frameborder="0" id="player" src="https://www.youtube.com/embed/KF47Za1lfjM?origin=http://control.wildearth.tv?modestbranding=1&amp;color=white&amp;autoplay=1;showinfo=0;" allowfullscreen=""></iframe>'+
+							'</div>'+
+						'</div>';
+					$('#main').text('');
+					$('#main').append(html);
+});
+
+//Ajax calling Donation form
+$('#donate').click(function(e){
+	e.preventDefault();
+	var html = '<div class="container">'+
+		'<form class="login-form donate" action="#" method="post">'+
+			'<fieldset>'+
+				'<img width="151" height="151" class="donate-img" alt="image description" src="images/img12.png">'+
+				'<strong class="title">Enter the amount you want to donate</strong>'+
+				'<input type="text" id="amount"><span class="currency-type">USD</span>'+
+				'<div class="note">'+
+					'<a onclick="donateSubmit()" href="javascript:void(0)" class="submit">Donat</a>'+
+				'</div>'+
+			'</fieldset>'+
+		'</form>'+
+	'</div>';						
+	$('#main').text('');
+	$('#main').append(html);		
+});
+
+
+//submit donation code
+function donateSubmit(){
+	var amount = $('#amount').val();		
+	console.log(amount);
+	$.ajax({
+		url: 'api/donation/save',
+		method: "POST",
+		dataType: "json",
+		data:{ amount : amount},
+		success: function (response) {
+			console.log(response.message);
+			var data = response.message.data;
+			
+		}
+	});
+
 }

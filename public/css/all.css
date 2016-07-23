@@ -101,7 +101,11 @@ table {
 	position:relative;
 	background:url(../images/bg-header.png) no-repeat;
 	background-size:100% 100%;
-	overflow:hidden;
+}
+#header:after{
+	display:block;
+	clear:both;
+	content:'';
 }
 .loader{
 	width:0;
@@ -533,7 +537,8 @@ table {
 .login-form .note{
 	overflow:hidden;
 }
-.login-form input[type="submit"]{
+.login-form input[type="submit"],
+.login-form .submit{
 	padding:9px 12px;
 	display:inline-block;
 	vertical-align:middle;
@@ -544,7 +549,9 @@ table {
 	color:#fff;
 	cursor:pointer;
 }
-.login-form input[type="submit"]:hover{ background:#000; }
+.login-form input[type="submit"],
+.login-form .submit:hover{ background:#000; }
+.login-form .submit{ pointer-events:none; }
 .login-form .note em{
 	margin-left:8px;
 	display:inline-block;
@@ -571,8 +578,12 @@ table {
 	font-weight:300;
 	text-transform:uppercase;
 }
-.donate input[type="submit"]{
-	display:block;
+.login-form.donate .note{ text-align:center; }
+.login-form.donate input[type="submit"],
+.login-form.donate .submit{
+	display:inline-block;
+	vertical-align:top;
+	color:#fff;
 	margin:0 auto;
 	background:#26307f;
 }
@@ -580,6 +591,7 @@ table {
 	position:relative;
 	overflow:hidden;
 }
+.twocols .img-holder iframe{ width:100%; }
 .twocols .btn-play{
 	width:35px;
 	height:42px;
@@ -604,7 +616,12 @@ table {
 	width:72px;
 	height:71px;
 	float:left;
+	background:url(../images/img15.png) no-repeat;
+	background-size:100% 100%;
+	text-indent:-9999px;
+	overflow:hidden;
 }
+.song-photo img{ height:100%; }
 .songs .info{
 	padding:0 25px;
 	font-size:17px;
@@ -925,6 +942,22 @@ table {
 	display:none;
 	overflow:hidden;
 }
+.live-stream{
+	margin:0 0 20px;
+	overflow:hidden;
+}
+.live-stream iframe{
+	width:100%;
+	height:600px;
+	display:block;
+}
+
+.live-stream strong{
+    color: #767676;
+    display: block;
+    font-weight: 400;
+    padding: 0 10px 7px;
+}
 @media only screen and (max-width:1180px){ .container{ padding:0 15px; } }
 @media only screen and (max-width:1048px){
 	#nav li{ margin-right:21px; }
@@ -1023,6 +1056,12 @@ table {
 		border-right:1px solid ##d7d7d7;
 	}
 	.chapters:before{ background:none; }
+	.player-holder{ padding:10px 15px; }
+	.current_song{
+		width:200px;
+		padding-top:10px;
+	}
+	.live-stream iframe{ height:270px; }
 }
 @media only screen and (max-width:480px){
 	.twocols .col{
@@ -1067,4 +1106,5 @@ table {
 		display:block;
 	}
 	.content-txt{ padding:0 15px; }
+	#audio_player{ width:257px; }
 }
