@@ -119,7 +119,7 @@ class InstaController extends Controller
         
         $data = $server_output;
         
-        dd($data['images']);
+        dd($data->images);
         
         return redirect('/admin/instagram');
         
