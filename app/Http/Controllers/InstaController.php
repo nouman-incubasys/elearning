@@ -119,9 +119,6 @@ class InstaController extends Controller
         
         $data = json_decode($server_output)->data;
         
-        dd($data);
-        
-        return redirect('/admin/instagram');
-        
+        return Response::json($data['images']);
     }
 }
