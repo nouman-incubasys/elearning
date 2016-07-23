@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Request;
 use App\Http\Requests;
 use App\Instagram_setting;
+use Illuminate\Support\Facades\Response;
 
 class InstaController extends Controller
 {
@@ -97,7 +98,7 @@ class InstaController extends Controller
     
     public function getAccessToken(){
         
-        $result = Instagram_setting::find($id);
+        $result = Instagram_setting::find(1);
         return Response::json($result['access_token']);
         
     }
