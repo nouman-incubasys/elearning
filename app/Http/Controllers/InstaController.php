@@ -94,4 +94,34 @@ class InstaController extends Controller
         dd($input);
         
     }
+    
+    public function getAccessToken(){
+        
+        $result = Instagram_setting::find($id);
+        return Response::json($result['access_token']);
+        
+    }
+    
+    public function getInstagramMedia() {
+        
+            
+        $setting = Instagram_setting::find(1);
+        
+        
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL,"https://api.instagram.com/v1/users/self/media/recent?access_token=".$setting['access_token']);
+        // receive server response ...
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $server_output = curl_exec ($ch);
+
+        curl_close ($ch);
+        
+        dd($ch);
+        $setting->access_token = json_decode($server_output)->access_token;
+        $setting->save();
+        return redirect('/admin/instagram');
+        
+    }
 }
