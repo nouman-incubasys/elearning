@@ -117,9 +117,9 @@ class InstaController extends Controller
 
         curl_close ($ch);
         
-        $data = json_decode($server_output);
+        $data = json_decode($server_output)->data;
         
-        dd($data['data']);
+        dd($data);
         
         return redirect('/admin/instagram');
         
