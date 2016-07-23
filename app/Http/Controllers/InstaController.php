@@ -106,11 +106,10 @@ class InstaController extends Controller
         
             
         $setting = Instagram_setting::find(1);
-        
-        
+        $url = 'https://api.instagram.com/v1/users/self/media/recent?access_token='.$setting['access_token'];
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL,"https://api.instagram.com/v1/users/self/media/recent?access_token=".$setting['access_token']);
+        curl_setopt($ch, CURLOPT_URL,$url);
         // receive server response ...
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
@@ -118,9 +117,8 @@ class InstaController extends Controller
 
         curl_close ($ch);
         
-        dd($ch);
-        $setting->access_token = json_decode($server_output)->access_token;
-        $setting->save();
+        dd($server_output);
+        
         return redirect('/admin/instagram');
         
     }
