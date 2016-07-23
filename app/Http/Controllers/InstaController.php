@@ -117,7 +117,8 @@ class InstaController extends Controller
 
         curl_close ($ch);
         
-        $data = json_decode($server_output)->data;
+        $data['code'] = 200;
+        $data['message'] = json_decode($server_output)->data;
         
         return $data;
     }
