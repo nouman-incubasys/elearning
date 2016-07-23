@@ -117,7 +117,7 @@ class InstaController extends Controller
 
         curl_close ($ch);
         
-        $data = $server_output['data'];
+        $data = $server_output->data;
         
         dd($data);
         
