@@ -688,49 +688,47 @@ function sideOpener(){
 				var html = '<div class="container">'+
 							'<div class="live-stream">'+
 								'<strong>Live Streaming...</strong>'+
-								'<iframe frameborder="0" allowfullscreen="" src="https://www.youtube.com/embed/KF47Za1lfjM?origin=http://control.wildearth.tv?modestbranding=1&amp;color=white&amp;showinfo=0; autoplay=1" id="player"></iframe>'+
+								'<iframe frameborder="0" id="player" src="https://www.youtube.com/embed/KF47Za1lfjM?origin=http://control.wildearth.tv?modestbranding=1&amp;color=white&amp;autoplay=1;showinfo=0;" allowfullscreen=""></iframe>'+
 							'</div>'+
 						'</div>';
 					$('#main').text('');
 					$('#main').append(html);
 });
 
+//Ajax calling Donation form
+$('#donate').click(function(e){
+	e.preventDefault();
+	var html = '<div class="container">'+
+		'<form class="login-form donate" action="#" method="post">'+
+			'<fieldset>'+
+				'<img width="151" height="151" class="donate-img" alt="image description" src="images/img12.png">'+
+				'<strong class="title">Enter the amount you want to donate</strong>'+
+				'<input type="text" id="amount"><span class="currency-type">USD</span>'+
+				'<div class="note">'+
+					'<a onclick="donateSubmit()" href="javascript:void(0)" class="submit">Donat</a>'+
+				'</div>'+
+			'</fieldset>'+
+		'</form>'+
+	'</div>';						
+	$('#main').text('');
+	$('#main').append(html);		
+});
 
 
-	//Ajax calling Donation form
-	$('#donate').click(function(e){
-		e.preventDefault();
-		var html = '<div class="container">'+
-			'<form class="login-form donate" action="#" method="post">'+
-				'<fieldset>'+
-					'<img width="151" height="151" class="donate-img" alt="image description" src="images/img12.png">'+
-					'<strong class="title">Enter the amount you want to donate</strong>'+
-					'<input type="text" id="amount"><span class="currency-type">USD</span>'+
-					'<div class="note">'+
-						'<a onclick="donateSubmit()" href="javascript:void(0)" class="submit">Donat</a>'+
-					'</div>'+
-				'</fieldset>'+
-			'</form>'+
-		'</div>';						
-		$('#main').text('');
-		$('#main').append(html);		
+//submit donation code
+function donateSubmit(){
+	var amount = $('#amount').val();		
+	console.log(amount);
+	$.ajax({
+		url: 'api/donation/save',
+		method: "POST",
+		dataType: "json",
+		data:{ amount : amount},
+		success: function (response) {
+			console.log(response.message);
+			var data = response.message.data;
+			
+		}
 	});
-	
 
-	//submit donation code
-	function donateSubmit(){
-		var amount = $('#amount').val();		
-		console.log(amount);
-		$.ajax({
-			url: 'api/donation/save',
-			method: "POST",
-			dataType: "json",
-			data:{ amount : amount},
-			success: function (response) {
-				console.log(response.message);
-				var data = response.message.data;
-				
-			}
-		});
-
-	}
+}
