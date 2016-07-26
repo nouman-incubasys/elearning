@@ -507,12 +507,13 @@ table {
 	overflow:hidden;
 }
 .signup-form textarea{
-	height:150px;
+	height:80px !important;
 	resize:none;
 }
 .signup-form .region select{
 	width:100%;
-	margin:0 0 7px;
+	height:40px;
+	margin:0 0 17px;
 }
 .login-form .forgot{
 	margin:0 0 20px;
@@ -535,6 +536,7 @@ table {
 .login-form .forgot a,
 .login-form .note a{ color:#1d2768; }
 .login-form .note{
+	padding-right:50px;
 	overflow:hidden;
 }
 .login-form input[type="submit"],
@@ -667,7 +669,7 @@ table {
 	vertical-align:middle;
 }
 .current_song{
-	width:400px;
+	width:290px;
 	padding-left:20px;
 	display:inline-block;
 	vertical-align:middle;
@@ -677,6 +679,11 @@ table {
 	height:39px;
 	margin-top:6px;
 	float:left;
+	background:url(../images/img15.png) no-repeat;
+	background-size:100% 100%;
+}
+img[src='']{
+    display: none;
 }
 .current_song .album_icon img{
 	width:39px;
@@ -857,6 +864,9 @@ table {
 	font-weight:600;
 	overflow:hidden;
 }
+.dropdowns ul li{ display:none; }
+.dropdowns ul li.active,
+.dropdowns ul li.active ul.inner-drop li{ display:block; }
 .dropdowns ul a{
 	padding:9px 30px;
 	display:block;

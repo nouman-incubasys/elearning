@@ -86,10 +86,14 @@ class AudiosController extends Controller
         
         $destinationPath = 'uploads/audio'; // upload path
         
-        $extension1 = $request->file('album_art')->getClientOriginalExtension(); // getting image extension
-        $fileName1 = rand(11111,99999).'.'.$extension1; // renameing image
-        $request->file('album_art')->move($destinationPath, $fileName1); // uploading file to given path
-        
+		if(File::exist($request->file('album_art'))){
+			$extension1 = $request->file('album_art')->getClientOriginalExtension(); // getting image extension
+			$fileName1 = rand(11111,99999).'.'.$extension1; // renameing image
+			$request->file('album_art')->move($destinationPath, $fileName1); // uploading file to given path
+		}
+		else{
+			$fileName1 = 'default_audio.png';
+		}
         $extension = $request->file('audio_file')->getClientOriginalExtension(); // getting image extension
         $fileName = rand(11111,99999).'.'.$extension; // renameing image
         $request->file('audio_file')->move($destinationPath, $fileName); // uploading file to given path

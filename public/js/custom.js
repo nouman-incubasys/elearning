@@ -58,6 +58,8 @@ $(window).resize(function(){
 /****************************************************************/
 	//Ajax calling the content from diffrent pages
 	$('#read').click(function(e){
+		history.pushState({foo:"foo"}, "Library", "library");
+		
 		e.preventDefault();
 		$.ajax({
 			url: 'api/books/all',
@@ -97,6 +99,8 @@ $(window).resize(function(){
 	
 		
 	$('#radio').click(function(e){
+		history.pushState({foo:"foo"}, "Radio", "radio");
+		
 		e.preventDefault();
 		$.ajax({
 			url: 'api/audio/all',
@@ -137,7 +141,7 @@ $(window).resize(function(){
 										'</audio>'+
 										'<div class="current_song">'+
 											'<div class="album_icon">'+
-												'<img id="album_art" src="'+ art[0] +'" >'+
+												'<img id="album_art" src="'+ art[0] +'">'+
 											'</div>'+
 											'<div class="txt">'+
 												'<strong>'+title[0]+'</strong>'+
@@ -177,6 +181,7 @@ $(window).resize(function(){
 	
 	var date = $('#date_time').val();
 	$('.devotion').click(function(e){
+			history.pushState({foo:"foo"}, "TV", "devotion");
 		e.preventDefault();
 		$.ajax({
 			url: 'api/dailyprayer/search',
@@ -331,13 +336,13 @@ newMONTH.push('<option value='+(i+1)+'>' + month_arr[i] + '</option>');
 							'</div>'+
 							'<input type="email" placeholder="Email" name="email" id="email" required="required">'+
 							'<input type="password" placeholder="Password" name="password" id="password" required="required">'+
-							'<textarea placeholder="Address" name="address" id="address" required="true"></textarea>'+
 							'<div class="row region">'+
 								'<select name="country" id="country" required="true">'+
 									'<option selected>Country</option>'+
 								'</select>'+
 								'<input type="text" name="city" placeholder="City" id="city" required="required">'+
 							'</div>'+
+							'<textarea placeholder="Address" name="address" id="address" required="true"></textarea>'+
 							'<div class="note">'+
 								'<input type="submit" value="Sign up">'+
 								'<em>or, <a href="#" class="login" onclick="login_clicked()">Sign in</a> if you already have an account.</em>'+
@@ -410,6 +415,7 @@ newMONTH.push('<option value='+(i+1)+'>' + month_arr[i] + '</option>');
 
 //Get all videos of this channel
 $('#video').click(function(e){
+	history.pushState({foo:"foo"}, "TV", "video");
 	e.preventDefault();
 	$.ajax({
 		url: 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCrsnAHn3coN8gZD8WkJ66gg&type=video&key=AIzaSyBjlWl7HLLxgNnUvmmihnge0ZcalgNIoe8',
@@ -684,6 +690,7 @@ function sideOpener(){
 
 //Ajax calling for live stream
 	$('#livestream').click(function(e){
+		history.pushState({foo:"foo"}, "TV", "livestream");
 		e.preventDefault();
 				var html = '<div class="container">'+
 							'<div class="live-stream">'+
@@ -697,6 +704,7 @@ function sideOpener(){
 
 //Ajax calling Donation form
 $('#donate').click(function(e){
+		history.pushState({foo:"foo"}, "TV", "donate");
 	e.preventDefault();
 	var html = '<div class="container">'+
 		'<form class="login-form donate" action="#" method="post">'+
@@ -705,7 +713,7 @@ $('#donate').click(function(e){
 				'<strong class="title">Enter the amount you want to donate</strong>'+
 				'<input type="text" id="amount"><span class="currency-type">USD</span>'+
 				'<div class="note">'+
-					'<a onclick="donateSubmit()" href="javascript:void(0)" class="submit">Donat</a>'+
+					'<a onclick="donateSubmit()" href="javascript:void(0)" class="submit">Donate</a>'+
 				'</div>'+
 			'</fieldset>'+
 		'</form>'+
@@ -732,3 +740,18 @@ function donateSubmit(){
 	});
 
 }
+
+document.onkeydown = fkey;
+document.onkeypress = fkey
+document.onkeyup = fkey;
+
+var wasPressed = false;
+
+function fkey(e){
+        e = e || window.event;
+       if( wasPressed ) return; 
+
+        if (e.keyCode == 116) {
+			window.location.replace("http://localhost/elearning/public");
+        }
+ }
